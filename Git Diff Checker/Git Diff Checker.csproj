@@ -6,4 +6,8 @@
     <RootNamespace>Git_Diff_Checker</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Resoucres\" />
+  </ItemGroup>
+
 </Project>

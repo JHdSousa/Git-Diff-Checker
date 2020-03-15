@@ -2,7 +2,7 @@
 
 namespace Git_Diff_Checker
 {
-    class Program
+    class MainProgram
     {
         static void Main(string[] args)
         {
