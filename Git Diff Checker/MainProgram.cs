@@ -2,7 +2,7 @@
 using System.Reflection;
 using System.IO;
 using System.Collections.Generic;
-//using Git_Diff_Checker.Resources;
+using Git_Diff_Checker.Properties;
 
 namespace Git_Diff_Checker
 {
@@ -10,7 +10,7 @@ namespace Git_Diff_Checker
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            functions.GetFiles();
         }
     }
 }

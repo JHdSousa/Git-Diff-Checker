@@ -59,48 +59,5 @@ namespace Git_Diff_Checker.Properties {
                 resourceCulture = value;
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Children of the sun, see your time has just begun, searching for your ways, through adventures every day. 
-        ///Every day and night, with the condor in flight, with all your friends in tow, you search for the Cities of Gold.
-        /// Ah-ah-ah-ah-ah… wishing for The Cities of Gold.
-        /// Ah-ah-ah-ah-ah… some day we will find The Cities of Gold. 
-        ///Do-do-do-do ah-ah-ah, do-do-do-do, Cities of Gold. Do-do-do-do, Cities of Gold. 
-        ///Ah-ah-ah-ah-ah… some day we will find The Cities of Gold. .
-        /// </summary>
-        internal static string file1 {
-            get {
-                return ResourceManager.GetString("file1", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to One for all and all for one, Muskehounds are always ready. 
-        ///One for all and all for one, helping everybody. 
-        ///One for all and all for one, it’s a pretty story. 
-        ///Sharing everything with fun, that’s the way to be. 
-        ///One for all and all for one, Muskehounds are always ready. 
-        ///One for all and all for one, helping everybody. One for all and all for one, can sound pretty corny. 
-        ///If you’ve got a problem chum, think how it could be. .
-        /// </summary>
-        internal static string file2 {
-            get {
-                return ResourceManager.GetString("file2", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Children of the sun, see your time has just begun, searching for your ways, through adventures every day. 
-        ///Every day and night, with the condor in flight, with all your friends in tow, you search for the Cities of Gold.
-        /// Ah-ah-ah-ah-ah… wishing for The Cities of Gold.
-        /// Ah-ah-ah-ah-ah… some day we will find The Cities of Gold. 
-        ///Do-do-do-do ah-ah-ah, do-do-do-do, Cities of Gold. Do-do-do-do, Cities of Gold. 
-        ///Ah-ah-ah-ah-ah… some day we will find The Cities of Gold. .
-        /// </summary>
-        internal static string file3 {
-            get {
-                return ResourceManager.GetString("file3", resourceCulture);
-            }
-        }
     }
 }

@@ -118,13 +118,22 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="file1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\file1.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  <data name="GitRepositories_1a" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GitRepositories_1a.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
-  <data name="file2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\file2.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  <data name="GitRepositories_1b" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GitRepositories_1b.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
-  <data name="file3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\file3.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  <data name="GitRepositories_2a" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GitRepositories_2a.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="GitRepositories_2b" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GitRepositories_2b.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="GitRepositories_3a" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GitRepositories_3a.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="GitRepositories_3b" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GitRepositories_3b.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
 </root>
