@@ -10,7 +10,8 @@ namespace Git_Diff_Checker
     {
         static void Main(string[] args)
         {
-            functions.GetFiles();
+            Console.ForegroundColor = ConsoleColor.White;
+            FileSelection.ChooseFile1();
         }
     }
 }

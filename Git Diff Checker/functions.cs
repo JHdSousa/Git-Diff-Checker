@@ -1,28 +1,24 @@
 ﻿using System;
-using System.Reflection;
-using System.IO;
 using System.Collections.Generic;
-using Git_Diff_Checker.Properties;
+using System.Text;
 
 
 namespace Git_Diff_Checker
 {
     class functions
     {
-        public static void ChooseFiles()
+        public static void diff(string file1, string file2)
         {
-            Console.WriteLine("Avalible files:" +
-                "1. File1  " +
-                "2. File2  " +
-                "3. File3");
-          string FileChoice1 =  Console.ReadLine();
-          GetFile(FileChoice1);
+            if(file1 == file2)
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("The files are the same", Console.ForegroundColor);
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("The files are different", Console.ForegroundColor);
+            }
         }
-        private static void GetFile(string choice)
-        {
-
-        }
-
-
     }
 }
