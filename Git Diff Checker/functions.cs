@@ -19,6 +19,7 @@ namespace Git_Diff_Checker
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("The files are different", Console.ForegroundColor);
             }
+            System.Environment.Exit(0);
         }
     }
 }

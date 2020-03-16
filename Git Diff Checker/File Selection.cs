@@ -14,10 +14,10 @@ namespace Git_Diff_Checker
             Console.WriteLine("Please select file from avalible files: " + "\n"+
                 "1. File_1a  " +
                 "2. File_1b  " +
-                "3. File_2a  " +
-                "4. File_2b  " +
-                "5. File_3a  " +
-                "6. File_3b ");
+                "3. File2a  " +
+                "4. File2b  " +
+                "5. File3a  " +
+                "6. File3b ");
           string FileChoice1 =  Console.ReadLine();
           string FileCheck1 = GetFile(FileChoice1);
             ChooseFile2(FileCheck1);
