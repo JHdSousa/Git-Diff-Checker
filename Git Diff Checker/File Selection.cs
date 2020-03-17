@@ -9,6 +9,7 @@ namespace Git_Diff_Checker
 {
     class FileSelection
     {
+        //choosing the first file
         public static void ChooseFile1()
         {
             Console.WriteLine("Please select file from avalible files: " + "\n"+
@@ -22,6 +23,7 @@ namespace Git_Diff_Checker
           string FileCheck1 = GetFile(FileChoice1);
             ChooseFile2(FileCheck1);
         }
+        //choosing the second file
         public static void ChooseFile2(string fileOne)
         {
             Console.WriteLine("Please select file from avalible files: " + "\n" +
@@ -36,6 +38,8 @@ namespace Git_Diff_Checker
             functions.diff(fileOne, FileCheck2);
             
         }
+        //assigns the users choice of file and converts the array to a string each time. 
+        //the string is then returned to be used in the comparative function
         private static string GetFile(string choice)
         {
             if(choice == "1")
@@ -74,10 +78,12 @@ namespace Git_Diff_Checker
                 string FileString = string.Join(",", FileC);
                 return FileString;
             }
+            //if the file is not found the function is recalled
             else
             {
                 Console.WriteLine("invalid file choice all files reset," +
                     " please enter a number between 1 and 6 to pick a file");
+                //recall to repick both of the files, resetting the variables even if one file it chosen
                 ChooseFile1();
                 return "file not found";
             }
