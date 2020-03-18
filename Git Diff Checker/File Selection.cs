@@ -10,7 +10,7 @@ namespace Git_Diff_Checker
     class FileSelection
     {
         //choosing the first file
-        public static void ChooseFile1()
+       /* public static void ChooseFile1()
         {
             Console.WriteLine("Please select file from avalible files: " + "\n"+
                 "1. File_1a  " +
@@ -88,6 +88,30 @@ namespace Git_Diff_Checker
                 return "file not found";
             }
 
+        }*/
+        public static void getFiles()
+        {
+            Console.WriteLine("please enter the file names of files to be checked, in format: File1.txt File2.txt");
+            string[] files = Console.ReadLine().Split();
+            
+            try
+            {   // Open the text file using a stream reader.
+                StreamReader file1= new StreamReader($"{files[0]}");
+                StreamReader file2 = new StreamReader($"{files[1]}");
+               // using (StreamReader sr = new StreamReader( files[0]))
+                //{
+                    // Read the stream to a string, and write the string to the console.
+                    String line1 = file1.ReadToEnd();
+                    String line2 = file2.ReadToEnd();
+                // Console.WriteLine(line);
+                // }
+                functions.diff(line1, line2);
+            }
+            catch (IOException e)
+            {
+                Console.WriteLine("The file could not be read:");
+                Console.WriteLine(e.Message);
+            }
         }
 
 

@@ -13,7 +13,7 @@ namespace Git_Diff_Checker
             //sets the text colour to white
             Console.ForegroundColor = ConsoleColor.White;
             //sends the user to select the first file
-            FileSelection.ChooseFile1();
+            FileSelection.getFiles();
         }
     }
 }
