@@ -10,84 +10,56 @@ namespace Git_Diff_Checker
     class FileSelection
     {
         //choosing the first file
-        public static void ChooseFile1()
+        public static void ChooseFiles()
         {
-            Console.WriteLine("Please select file from avalible files: " + "\n"+
-                "1. File_1a  " +
-                "2. File_1b  " +
-                "3. File2a  " +
-                "4. File2b  " +
-                "5. File3a  " +
-                "6. File3b ");
-          string FileChoice1 =  Console.ReadLine();
-          string FileCheck1 = GetFile(FileChoice1);
-            ChooseFile2(FileCheck1);
-        }
-        //choosing the second file
-        public static void ChooseFile2(string fileOne)
-        {
-            Console.WriteLine("Please select file from avalible files: " + "\n" +
-                "1. File_1a  " +
-                "2. File_1b  " +
-                "3. File_2a  " +
-                "4. File_2b  " +
-                "5. File_3a  " +
-                "6. File_3b ");
-            string FileChoice2 = Console.ReadLine();
-            string FileCheck2 = GetFile(FileChoice2);
-            functions.diff(fileOne, FileCheck2);
+            Console.WriteLine(":> [INPUT] ");
+          string [] UserIn  = Console.ReadLine().Split();
+            try
+            {
+            string file1 = GetFile(UserIn[1]);
+            string file2 = GetFile(UserIn[2]);
+            functions.CheckCommand(UserIn[0], file1, file2);
+            }
+            catch
+            {
+                Console.WriteLine("Input missing component");
+            }
             
         }
+        //choosing the second file
+        
         //assigns the users choice of file and converts the array to a string each time. 
         //the string is then returned to be used in the comparative function
-        private static string GetFile(string choice)
+        private static string GetFile(string file1)
         {
-            if(choice == "1")
+            string file = "";
+            switch (file1)
             {
-                string[] FileC = Properties.Resources.GitRepositories_1a.Split("\n");
-                string FileString = string.Join(",", FileC);
-                return FileString;
-            }
-            else if(choice== "2")
-            {
-                string[] FileC = Properties.Resources.GitRepositories_1b.Split("\n");
-                string FileString = string.Join(",", FileC);
-                return FileString;
-            }
-           else if(choice== "3")
-            {
-                string[] FileC = Properties.Resources.GitRepositories_2a.Split("\n");
-                string FileString = string.Join(",", FileC);
-                return FileString;
-            }
-            else if(choice== "4")
-            {
-                string[] FileC = Properties.Resources.GitRepositories_2b.Split("\n");
-                string FileString = string.Join(",", FileC);
-                return FileString;
-            }
-            else if(choice== "5")
-            {
-                string[] FileC = Properties.Resources.GitRepositories_3a.Split("\n");
-                string FileString = string.Join(",", FileC);
-                return FileString;
-            }
-            else if(choice== "6")
-            {
-                string[] FileC = Properties.Resources.GitRepositories_3b.Split("\n");
-                string FileString = string.Join(",", FileC);
-                return FileString;
-            }
-            //if the file is not found the function is recalled
-            else
-            {
-                Console.WriteLine("invalid file choice all files reset," +
-                    " please enter a number between 1 and 6 to pick a file");
-                //recall to repick both of the files, resetting the variables even if one file it chosen
-                ChooseFile1();
-                return "file not found";
-            }
+                case "GitRepositories_1a.txt":
+                    file = Properties.Resources.GitRepositories_1a;
+                    break;
 
+                case "GitRepositories_1b.txt":
+                    file = Properties.Resources.GitRepositories_1b;
+                    break;
+
+                case "GitRepositories_2a.txt":
+                    file = Properties.Resources.GitRepositories_2a;
+                    break;
+
+                case "GitRepositories_2b.txt":
+                    file = Properties.Resources.GitRepositories_2b;
+                    break;
+
+                case "GitRepositories_3a.txt":
+                    file = Properties.Resources.GitRepositories_3a;
+                    break;
+
+                case "GitRepositories_3b.txt":
+                    file = Properties.Resources.GitRepositories_3b;
+                    break;
+            }
+            return file;
         }
 
 
