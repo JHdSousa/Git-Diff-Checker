@@ -22,7 +22,7 @@ namespace Git_Diff_Checker
             }
             catch
             {
-                Console.WriteLine("Input missing component");
+                Console.WriteLine("Input missing component, please use the format: diif file1.txt fil2.txt");
             }
             
         }
