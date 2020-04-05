@@ -16,7 +16,7 @@ namespace Git_Diff_Checker
           string [] UserIn  = Console.ReadLine().Split();
             try
             {
-            string[] file1 = GetFile(UserIn[1]);
+            string[] file1 =  GetFile(UserIn[1]);
             string[] file2 = GetFile(UserIn[2]);
             functions.CheckCommand(UserIn[0], file1, file2);
             }

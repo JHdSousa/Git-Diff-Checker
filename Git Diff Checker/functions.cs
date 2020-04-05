@@ -22,6 +22,7 @@ namespace Git_Diff_Checker
                     //if it is a match the text becomes green and the user is told the files are the same
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine("The files are the same", Console.ForegroundColor);
+                
                 }
                 else
                 {
@@ -30,6 +31,7 @@ namespace Git_Diff_Checker
                     Console.WriteLine("The files are different", Console.ForegroundColor);
                 }
             }
+            
             
         }
         public static void CheckCommand(string Command, string[] file1, string[] file2)
