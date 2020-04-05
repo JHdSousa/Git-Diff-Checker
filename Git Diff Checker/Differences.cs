@@ -5,12 +5,15 @@ using System.Linq;
 
 namespace Git_Diff_Checker
 {
+    //basic class foe checking if the files are different
     public class Diff
     {
+        //set the display to blue during the basic diff
         public  static void DisplayColour()
         {
             Console.ForegroundColor = ConsoleColor.Blue;
         } 
+        //checking the file exists
         public static void FileExist (string[] file1, string[] file2)
         {
             if (file1.Length == 0 || file2.Length == 0)
@@ -20,6 +23,7 @@ namespace Git_Diff_Checker
             else
             { Basicdiff(file1, file2); }
             }
+        //runs basic diff check on the files
         public static void Basicdiff(string[] file1, string[] file2)
         {         
                 if (Enumerable.SequenceEqual(file1, file2))
@@ -37,8 +41,10 @@ namespace Git_Diff_Checker
                 }            
         }
     }
+    //class for if things have been added to the file
     class Addition : Diff
     {
+        //overrides the display colour from parent class to green
         public static void OverrideDisplayColour()
         {
             Console.ForegroundColor = ConsoleColor.Green;
@@ -48,9 +54,10 @@ namespace Git_Diff_Checker
 
         }
     }
-
+    //for if things have been removed from the file
     class Removed : Diff
     {
+        //overrides the display colour from parent class to red
         public static void OverrideDisplayColour()
         {
             Console.ForegroundColor = ConsoleColor.Red;
