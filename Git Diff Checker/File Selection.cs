@@ -7,7 +7,7 @@ using Git_Diff_Checker.Properties;
 
 namespace Git_Diff_Checker
 {
-    publicclass FileSelection
+    public class FileSelection
     {
         //choosing the first file
         public static void ChooseFiles()

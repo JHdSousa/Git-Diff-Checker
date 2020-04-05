@@ -42,7 +42,7 @@ namespace Git_Diff_Checker
                 case "diff":
                     try
                     {
-                        diff(file1,file2);
+                        Diff.Basicdiff(file1,file2);
                     }
                     catch (NullReferenceException )
                     {

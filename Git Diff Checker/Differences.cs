@@ -7,7 +7,7 @@ namespace Git_Diff_Checker
 {
     public class Diff
     {
-       public  static void DisplayColour()
+        public  static void DisplayColour()
         {
             Console.ForegroundColor = ConsoleColor.Blue;
         } 
@@ -39,17 +39,25 @@ namespace Git_Diff_Checker
     }
     class Addition : Diff
     {
-        public static void DisplayColour()
+        public static void OverrideDisplayColour()
         {
             Console.ForegroundColor = ConsoleColor.Green;
+        }
+        public static void Additions(string[] file1, string[] file2)
+        {
+
         }
     }
 
     class Removed : Diff
     {
-        public static void DisplayColour()
+        public static void OverrideDisplayColour()
         {
             Console.ForegroundColor = ConsoleColor.Red;
+        }
+        public static void Removals(string[] file1, string[] file2)
+        {
+
         }
     }
 }
