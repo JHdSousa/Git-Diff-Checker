@@ -6,9 +6,9 @@ using System.Linq;
 
 namespace Git_Diff_Checker
 {
-    class functions
+    public class CommandCheck 
     {
-        //function to compare the two files 
+      /*  //function to compare the two files 
         public static void diff(string[] file1, string[] file2)
         {
             if (file1.Length == 0 || file2.Length == 0)
@@ -33,7 +33,8 @@ namespace Git_Diff_Checker
             }
             
             
-        }
+        }*/         
+
         public static void CheckCommand(string Command, string[] file1, string[] file2)
         {
             switch (Command)

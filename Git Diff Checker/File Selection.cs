@@ -7,7 +7,7 @@ using Git_Diff_Checker.Properties;
 
 namespace Git_Diff_Checker
 {
-    class FileSelection
+    publicclass FileSelection
     {
         //choosing the first file
         public static void ChooseFiles()
@@ -18,7 +18,7 @@ namespace Git_Diff_Checker
             {
             string[] file1 =  GetFile(UserIn[1]);
             string[] file2 = GetFile(UserIn[2]);
-            functions.CheckCommand(UserIn[0], file1, file2);
+             CommandCheck.CheckCommand(UserIn[0], file1, file2);
             }
             catch
             {
