@@ -24,8 +24,9 @@ namespace Git_Diff_Checker
                     FileSelection file2 = new FileSelection(UserIn[2]);
                     //check for command word
                     CommandCheck.CheckCommand(UserIn[0], file1.GetContents(), file2.GetContents());
+                    Console.WriteLine("wibble");
                 }
-                catch
+                catch( Exception ex)
                 {
                     Console.WriteLine("Input missing component, please use the format: diif file1.txt fil2.txt");
                 }

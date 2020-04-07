@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
-
+using Git_Diff_Checker.Enums;
 
 namespace Git_Diff_Checker
 {
@@ -42,7 +42,28 @@ namespace Git_Diff_Checker
                 Console.WriteLine(":> [OUTPUT] One of the files selected does not exist");
             }
             else
-            { Addition.Changes(file1, file2,5); }
+            {
+
+
+                var file2List = new List<string> { "1", "4", "a" };
+                var file1List = new List<string> { "1", "a", "c", "5", "b" };
+                //var file2List = file2.ToList();
+                //file2List.Insert(2, "wibble");
+                file1 = file1List.ToArray();
+                file2 = file2List.ToArray();
+                //file1 = file1.ToList().Insert(2, "wibble").ToArray();
+
+
+
+                var differences = new  Addition().Changes(file1, file2,Actions.Addition);
+                differences.AddRange(new Addition().Changes(file2, file1, Actions.Removal));
+            foreach (var difference in differences)
+                {
+                    Console.WriteLine($"Position {difference.Position} Type {difference.Action}");
+                }
+            
+            
+            }
         }
         //checks command word entered by the user
         public static void CheckCommand(string Command, string[] file1, string[] file2)
