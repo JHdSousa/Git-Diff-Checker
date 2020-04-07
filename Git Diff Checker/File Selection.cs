@@ -9,15 +9,32 @@ namespace Git_Diff_Checker
 {
     public class FileSelection
     {
+        private string[] file { get; set; }
+        private int FileLen = 0;
+        public FileSelection(string fileName)
+        {
+            file = GetFile(fileName);
+            FileLen = file.Length;
+        }
+       public string[] GetContents()
+        {
+            return file;
+        }
+        public int GetLength()
+        {
+            return FileLen;
+        }
         //choosing the first file
-        public static void ChooseFiles()
+       /* public static void ChooseFiles()
         {
             Console.WriteLine(":> [INPUT] ");
           string [] UserIn  = Console.ReadLine().Split();
             try
             {
+                //reading in files as arrays
             string[] file1 =  GetFile(UserIn[1]);
             string[] file2 = GetFile(UserIn[2]);
+                //check for command word
              CommandCheck.CheckCommand(UserIn[0], file1, file2);
             }
             catch
@@ -25,12 +42,12 @@ namespace Git_Diff_Checker
                 Console.WriteLine("Input missing component, please use the format: diif file1.txt fil2.txt");
             }
             
-        }
-        //choosing the second file
+        }*/
+        
         
         //assigns the users choice of file and converts the array to a string each time. 
         //the string is then returned to be used in the comparative function
-        private static string[] GetFile(string file1)
+        public static string[] GetFile(string file1)
         {
             string[]  file = new string[] { };
             switch (file1)
