@@ -6,7 +6,7 @@ using System.Linq;
 namespace Git_Diff_Checker
 {
     //basic class foe checking if the files are different
-    abstract class Diff
+    public class Diff
     {
         //set the display to blue during the basic diff
         public  static void DisplayColour()
@@ -50,7 +50,8 @@ namespace Git_Diff_Checker
             }
             else
             {
-                for(int i =0; i < longest; i++)
+                int diffs = 0;
+                for (int i =0; i < longest; i++)
                 {
                     if (file1[i] == file2[i])
                     {
@@ -69,7 +70,7 @@ namespace Git_Diff_Checker
     class Addition : Diff
     {
         //overrides the display colour from parent class to green
-        public static void DisplayColour()
+        public static void OverrideDisplayColour()
         {
             Console.ForegroundColor = ConsoleColor.Green;
         }
@@ -106,7 +107,7 @@ namespace Git_Diff_Checker
     class Removed : Diff
     {
         //overrides the display colour from parent class to red
-        public static void DisplayColour()
+        public static void OverrideDisplayColour()
         {
             Console.ForegroundColor = ConsoleColor.Red;
         }
@@ -138,4 +139,4 @@ namespace Git_Diff_Checker
         }
     }
     }
-}
+

@@ -42,7 +42,7 @@ namespace Git_Diff_Checker
                 Console.WriteLine(":> [OUTPUT] One of the files selected does not exist");
             }
             else
-            { Addition.Changes(file1, file2); }
+            { Addition.Changes(file1, file2,5); }
         }
         //checks command word entered by the user
         public static void CheckCommand(string Command, string[] file1, string[] file2)
