@@ -93,7 +93,7 @@ namespace Git_Diff_Checker
                 int positionFile1 = 0; //j
                 int possibleFile1Offset = 0;
 
-                while (positionFile2 <= file2.Length)
+                while (positionFile2 <= file2.Length-1)
                 {
                     if (file2.Length > positionFile2 && file1[positionFile1 + possibleFile1Offset] == file2[positionFile2])
                     {
@@ -137,9 +137,9 @@ namespace Git_Diff_Checker
                     positionFile2++;
                 }
 
-                if (positionFile2 < file2.Length)
+                if (positionFile2 >= file2.Length)
                 {
-                    for (var k = positionFile2 + 1; k < file2.Length; k++)
+                    for (var k = positionFile2; k <= file1.Length; k++)
                     {
                         changeList.Add(new Change { Position = k, Action = action });
                     }
