@@ -37,14 +37,14 @@ namespace Git_Diff_Checker
           //checks the two files both exist before trying to find differences
         public static void FileExist(string[] file1, string[] file2)
         {
+            //checks that the file array isnt empty
             if (file1.Length == 0 || file2.Length == 0)
             {
+                //if it is empty then the file entered could not be found by the system 
                 Console.WriteLine(":> [OUTPUT] One of the files selected does not exist");
             }
             else
             {
-
-
                 var file2List = new List<string> { "1", "4", "a" };
                 var file1List = new List<string> { "1", "a", "c", "5", "b" };
                 //var file2List = file2.ToList();
@@ -54,9 +54,11 @@ namespace Git_Diff_Checker
                 //file1 = file1.ToList().Insert(2, "wibble").ToArray();
 
 
-
+                //looks for additions in the file and creates a list variable
                 var differences = new  Addition().Changes(file1, file2,Actions.Addition);
-                differences.AddRange(new Addition().Changes(file2, file1, Actions.Removal));
+                //adds more values to the list if there are removals also found in the file
+                differences.AddRange(new Removed().Changes(file1, file2, Actions.Removal));
+                //displays all the differences in the file found, to the user
             foreach (var difference in differences)
                 {
                     Console.WriteLine($"Position {difference.Position} Type {difference.Action}");
