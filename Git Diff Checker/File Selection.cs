@@ -47,10 +47,10 @@ namespace Git_Diff_Checker
         
         //assigns the users choice of file and converts the array to a string each time. 
         //the string is then returned to be used in the comparative function
-        public static string[] GetFile(string file1)
+        public static string[] GetFile(string fileChoice)
         {
             string[]  file = new string[] { };
-            switch (file1)
+            switch (fileChoice)
             {
                 case "GitRepositories_1a.txt":
                     file = Properties.Resources.GitRepositories_1a.Split();

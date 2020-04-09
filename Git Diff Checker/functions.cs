@@ -45,17 +45,17 @@ namespace Git_Diff_Checker
             }
             else
             {
-                var file2List = new List<string> { "1", "4", "a" };
-                var file1List = new List<string> { "1", "a", "c", "5", "b" };
+                //var file2List = new List<string> { "1", "4", "a" };
+               // var file1List = new List<string> { "1", "a", "c", "5", "b" };
                 //var file2List = file2.ToList();
                 //file2List.Insert(2, "wibble");
-                file1 = file1List.ToArray();
-                file2 = file2List.ToArray();
+               // file1 = file1List.ToArray();
+               // file2 = file2List.ToArray();
                 //file1 = file1.ToList().Insert(2, "wibble").ToArray();
 
 
                 //looks for additions in the file and creates a list variable
-                var differences = new  Addition().Changes(file1, file2,Actions.Addition);
+                var differences = new Addition().Changes(file1, file2,Actions.Addition);
                 //adds more values to the list if there are removals also found in the file
                 differences.AddRange(new Removed().Changes(file1, file2, Actions.Removal));
                 //displays all the differences in the file found, to the user
