@@ -65,15 +65,15 @@ namespace Git_Diff_Checker
                     break;
 
                 case "3.txt":
-                    file = Properties.Resources.GitRepositories_2b.Split();
+                    file = Properties.Resources.file3.Split();
                     break;
 
                 case "2.txt":
-                    file = Properties.Resources.GitRepositories_3a.Split();
+                    file = Properties.Resources.file2.Split();
                     break;
 
                 case "1.txt":
-                    file = Properties.Resources.GitRepositories_3b.Split();
+                    file = Properties.Resources.file1.Split();
                     break;
             }
             return file;
