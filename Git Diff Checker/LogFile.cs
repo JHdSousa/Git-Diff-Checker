@@ -8,7 +8,7 @@ namespace Git_Diff_Checker
 {
     class LogFile
     {
-        public static void FileCreation(List<Change>differencesList, List<string>ChangedList)
+        public static void FileCreation(List<Change> differencesList, List<string> ChangedList)
         {
             string path = @"c:\Desktop\LogFile.txt";
             try
@@ -20,7 +20,10 @@ namespace Git_Diff_Checker
                         writer.WriteLine($"Position {difference.Position} Type {difference.Action}");
                     }
                 }
-            
+
             }
+            catch (NullReferenceException) { Console.WriteLine("no values found"); }
+        }
     }
 }
+
