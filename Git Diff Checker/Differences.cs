@@ -14,34 +14,7 @@ namespace Git_Diff_Checker
         {
             Console.ForegroundColor = ConsoleColor.Blue;
         }
-        //checking the file exists
-        /* public static void FileExist (string[] file1, string[] file2)
-         {
-             if (file1.Length == 0 || file2.Length == 0)
-             {
-                 Console.WriteLine(":> [OUTPUT] One of the files selected does not exist");
-             }
-             else
-             { Basicdiff(file1, file2); }
-             }*/
-        //runs basic diff check on the files
-        /* public static void Basicdiff(string[] file1, string[] file2)
-         {         
-                 if (Enumerable.SequenceEqual(file1, file2))
-                 {
-                 //if it is a match the text becomes green and the user is told the files are the same
-                 DisplayColour();
-                 Console.WriteLine("The files are the same", Console.ForegroundColor);
-
-                 }
-                 else
-                 {
-                     //if it is a match the text becomes red and the user is told the files are not the same
-                     Console.ForegroundColor = ConsoleColor.Red;
-                     Console.WriteLine("The files are different", Console.ForegroundColor);
-                 }            
-         }*/
-        //internal virtual string[] Changes(string[] file1, string[] file2, int longest)
+       
         internal virtual List<Change> Changes(string[] file1, string[] file2, Actions action)
         {
             List<Change> changeList = new List<Change>();
