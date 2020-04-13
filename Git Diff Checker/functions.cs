@@ -59,17 +59,19 @@ namespace Git_Diff_Checker
                 //adds more values to the list if there are removals also found in the file
                 differences.AddRange(new Removed().Changes(file1, file2, Actions.Removal));
                 List<string> changeList = new List<string>();
-                for(int i = 0; i<file2.Length; i++)
+                for(int i = 0; i<file1.Length; i++)
                 {
                     foreach (var difference in differences)
                     {
-                        if (differences.Contains(i))
+                        if (difference.Position == i  &&  difference.Action = Actions.Removal)
                         {
                             changeList.Add(difference.Word);
+                            break;
                         }
                         else
                         {
-                            changeList.Add(file2[i]);
+                            changeList.Add(file1[i]);
+                            break;
                         }
                     }                   
                 }
