@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using System;
 using System.IO;
 using Git_Diff_Checker.Enums;
 
@@ -9,7 +8,7 @@ namespace Git_Diff_Checker
 {
     class LogFile
     {
-        public void FileCreation(List<Change>differencesList)
+        public static void FileCreation(List<Change>differencesList, List<string>ChangedList)
         {
             string path = @"c:\Desktop\LogFile.txt";
             try

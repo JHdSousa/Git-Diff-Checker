@@ -65,11 +65,16 @@ namespace Git_Diff_Checker
                 int positionFile2 = 0; //shows the current place in the original file
                 int positionFile1 = 0; //shows the current place in the edited file
                 int possibleFile1Offset = 0;// offset due to differences found in the file
+                int LineNumber = 0;
 
                 //to loop through all the values in the original array
                 
                 while (positionFile2 <= file2.Length-1)
                 {
+                    if(file2[positionFile2] == " ")
+                    {
+                        LineNumber++;
+                    }
                     if (file2.Length > positionFile2 && file1[positionFile1 + possibleFile1Offset] == file2[positionFile2])//for when the values are the same
                     {
                         //both positions are increased
@@ -88,7 +93,7 @@ namespace Git_Diff_Checker
                         if (file1.Length <= positionFile1 + possibleFile1Offset || file1[positionFile1 +possibleFile1Offset] != file2[positionFile2])
                         {
                             //a possible addition has been found and added to the list, continaing enums for position and action
-                            possibleAdditions.Add(new Change { Position = positionFile1 + possibleFile1Offset, Action = action });
+                            possibleAdditions.Add(new Change { Word = file1[positionFile1 + possibleFile1Offset],Position = positionFile1 + possibleFile1Offset, LineNumber = LineNumber, Action = action  });
                         }
                         else
                         {
@@ -157,10 +162,15 @@ namespace Git_Diff_Checker
                 int positionFile2 = 0; //shows the current place in the original file
                 int positionFile1 = 0; //shows the current place in the edited file
                 int possibleFile1Offset = 0;// offset due to differences found in the file
+                int LineNumber = 0;
 
                 //to loop through all the values in the original array
                 while (positionFile2 <= file2.Length - 1)
                 {
+                    if(file2[positionFile2]==" ")
+                    {
+                        LineNumber++;
+                    }
                     if (file2.Length > positionFile2 && file1[positionFile1 + possibleFile1Offset] == file2[positionFile2])//for when the values are the same
                     {
                         //both positions are increased
@@ -184,7 +194,7 @@ namespace Git_Diff_Checker
                         }
                         else
                         {
-                            possibleRemovals.Add(new Change { Position = positionFile2 + possibleFile1Offset, Action = action });
+                            possibleRemovals.Add(new Change { Word = file1[positionFile1 + possibleFile1Offset], Position = positionFile1 + possibleFile1Offset, LineNumber = LineNumber, Action = action });
                             //if the value being searched for is finally found in the edited file 
                             RemovalFound = true;
                             break;

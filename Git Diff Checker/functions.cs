@@ -6,7 +6,7 @@ using Git_Diff_Checker.Enums;
 
 namespace Git_Diff_Checker
 {
-    public class CommandCheck 
+    public class CommandCheck
     {
         /*  //function to compare the two files 
           public static void diff(string[] file1, string[] file2)
@@ -34,7 +34,7 @@ namespace Git_Diff_Checker
 
 
           }*/
-          //checks the two files both exist before trying to find differences
+        //checks the two files both exist before trying to find differences
         public static void FileExist(string[] file1, string[] file2)
         {
             //checks that the file array isnt empty
@@ -46,20 +46,38 @@ namespace Git_Diff_Checker
             else
             {
                 //var file2List = new List<string> { "1", "4", "a" };
-               // var file1List = new List<string> { "1", "a", "c", "5", "b" };
+                // var file1List = new List<string> { "1", "a", "c", "5", "b" };
                 //var file2List = file2.ToList();
                 //file2List.Insert(2, "wibble");
-               // file1 = file1List.ToArray();
-               // file2 = file2List.ToArray();
+                // file1 = file1List.ToArray();
+                // file2 = file2List.ToArray();
                 //file1 = file1.ToList().Insert(2, "wibble").ToArray();
 
 
                 //looks for additions in the file and creates a list variable
-                var differences = new Addition().Changes(file1, file2,Actions.Addition);
+                var differences = new Addition().Changes(file1, file2, Actions.Addition);
                 //adds more values to the list if there are removals also found in the file
                 differences.AddRange(new Removed().Changes(file1, file2, Actions.Removal));
+                List<string> changeList = new List<string>();
+                for(int i = 0; i<file2.Length; i++)
+                {
+                    foreach (var difference in differences)
+                    {
+                        if (i == difference.Position)
+                        {
+                            changeList.Add(difference.Word);
+                        }
+                        else
+                        {
+                            changeList.Add(file2[i]);
+                        }
+                    }                   
+                }
+
+
+            LogFile.FileCreation(differences, changeList);
                 //displays all the differences in the file found, to the user
-            foreach (var difference in differences)
+                 foreach (var difference in differences)
                 {
                     Console.WriteLine($"Position {difference.Position} Type {difference.Action}");
                 }
