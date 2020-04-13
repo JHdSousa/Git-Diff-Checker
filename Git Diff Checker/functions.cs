@@ -63,7 +63,7 @@ namespace Git_Diff_Checker
                 {
                     foreach (var difference in differences)
                     {
-                        if (i == difference.Position)
+                        if (differences.Contains(i))
                         {
                             changeList.Add(difference.Word);
                         }
