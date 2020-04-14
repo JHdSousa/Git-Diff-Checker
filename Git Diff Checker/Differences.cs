@@ -15,7 +15,7 @@ namespace Git_Diff_Checker
             Console.ForegroundColor = ConsoleColor.Blue;
         }
        
-        internal virtual List<Change> Changes(string[] file1, string[] file2, Actions action)
+        public virtual List<Change> Changes(string[] file1, string[] file2, Actions action)
         {
             List<Change> changeList = new List<Change>();
             if (Enumerable.SequenceEqual(file1, file2))
@@ -42,7 +42,7 @@ namespace Git_Diff_Checker
         }
     }
     //class for if things have been added to the file
-    class Addition : Diff
+    public class Addition : Diff
     {
         //overrides the display colour from parent class to green
         public void OverrideDisplayColour()
@@ -50,7 +50,7 @@ namespace Git_Diff_Checker
             Console.ForegroundColor = ConsoleColor.Green;
         }
         //internal override string[] Changes(string[] file1, string[] file2, int longest)
-        internal override List<Change> Changes(string[] file1, string[] file2, Actions action)
+        public override List<Change> Changes(string[] file1, string[] file2, Actions action)
         {
             int[] changes = new int[] { };
             List<Change> changeList = new List<Change>();
@@ -65,7 +65,7 @@ namespace Git_Diff_Checker
                 int positionFile2 = 0; //shows the current place in the original file
                 int positionFile1 = 0; //shows the current place in the edited file
                 int possibleFile1Offset = 0;// offset due to differences found in the file
-                int LineNumber = 0;
+                int LineNumber = 1;
 
                 //to loop through all the values in the original array
                 
@@ -75,19 +75,20 @@ namespace Git_Diff_Checker
                     {
                         LineNumber++;
                     }
-                    if (file2.Length > positionFile2 && file1[positionFile1 + possibleFile1Offset] == file2[positionFile2])//for when the values are the same
+                    if (file2.Length > positionFile2 && file1.Length > 0 && file1[positionFile1 + possibleFile1Offset] == file2[positionFile2])//for when the values are the same
                     {
                         //both positions are increased
                         positionFile2++;
                         positionFile1++;
                         continue;
                     }
+                    else if(file1.Length < 1) { return changeList; }
                     //list created to hold possible additions that the application has come across in the file
                     List<Change> possibleAdditions = new List<Change>();
                     //boolean which is originally set to false and becomes true if the difference found is an addition
                     bool additionFound = false;
                     //while loop to loop through all the values in the edited file
-                    while (positionFile1 + possibleFile1Offset <= file1.Length)
+                    while (positionFile1 + possibleFile1Offset < file1.Length)
                     {
                         //as long as the current position is not longer then the file length or postion is not the same as the one in original file
                         if (file1.Length <= positionFile1 + possibleFile1Offset || file1[positionFile1 +possibleFile1Offset] != file2[positionFile2])
@@ -113,7 +114,8 @@ namespace Git_Diff_Checker
                     else
                     {
                         //resets position in edited file if possible addiitons  not confirmed
-                        positionFile1 -= possibleAdditions.Count() - 1; // possibleAdditions.Count() -1;
+                        positionFile1 = positionFile2;
+                       // positionFile1 -= possibleAdditions.Count() - 1; // possibleAdditions.Count() -1;
                     }
                     //reset for the possible offset
                     possibleFile1Offset = 0;
@@ -126,10 +128,10 @@ namespace Git_Diff_Checker
                 if (positionFile2 >= file2.Length)
                 {
                     //each value left in edited file
-                    for (var k = positionFile2; k <= file1.Length; k++)
+                    for (var k = positionFile2; k <= file1.Length-1; k++)
                     {
                         //each value added to the change file
-                        changeList.Add(new Change { Position = k-1, Action = action });
+                        changeList.Add(new Change { Word = file1[positionFile1 + possibleFile1Offset], Position = positionFile1 + possibleFile1Offset, LineNumber = LineNumber, Action = action });
                     }
                 }
                //complete change list returned 
@@ -140,14 +142,14 @@ namespace Git_Diff_Checker
 
         
     //for if things have been removed from the file
-    class Removed : Diff
+    public class Removed : Diff
     {
         //overrides the display colour from parent class to red
         public void OverrideDisplayColour()
         {
             Console.ForegroundColor = ConsoleColor.Red;
         }
-        internal override List<Change> Changes(string[] file1, string[] file2, Actions action)
+        public override List<Change> Changes(string[] file1, string[] file2, Actions action)
         {
             int[] changes = new int[] { };
             List<Change> changeList = new List<Change>();
@@ -162,7 +164,7 @@ namespace Git_Diff_Checker
                 int positionFile2 = 0; //shows the current place in the original file
                 int positionFile1 = 0; //shows the current place in the edited file
                 int possibleFile1Offset = 0;// offset due to differences found in the file
-                int LineNumber = 0;
+                int LineNumber = 1;
 
                 //to loop through all the values in the original array
                 while (positionFile2 <= file2.Length - 1)
@@ -170,8 +172,8 @@ namespace Git_Diff_Checker
                     if(file2[positionFile2]==" ")
                     {
                         LineNumber++;
-                    }
-                    if (file2.Length > positionFile2 && file1[positionFile1 + possibleFile1Offset] == file2[positionFile2])//for when the values are the same
+                    } 
+                    if (file2.Length > positionFile2 && file1.Length > 0 && file1[positionFile1 + possibleFile1Offset] == file2[positionFile2])//for when the values are the same
                     {
                         //both positions are increased
                         positionFile2++;
@@ -189,12 +191,13 @@ namespace Git_Diff_Checker
                         if (file1.Length-1 > positionFile1 + possibleFile1Offset && file1[positionFile1 + possibleFile1Offset] != file2[positionFile2])
                         {
                             //a possible removal has been found and added to the list, continaing enums for position and action
+                            possibleRemovals.Add(new Change { Word = file2[positionFile1 + possibleFile1Offset], Position = positionFile1 + possibleFile1Offset, LineNumber = LineNumber, Action = action });
                             positionFile1++;
                             continue;
                         }
                         else
                         {
-                            possibleRemovals.Add(new Change { Word = file1[positionFile1 + possibleFile1Offset], Position = positionFile1 + possibleFile1Offset, LineNumber = LineNumber, Action = action });
+                            
                             //if the value being searched for is finally found in the edited file 
                             RemovalFound = true;
                             break;
@@ -222,7 +225,7 @@ namespace Git_Diff_Checker
                     positionFile2++;
                 }
                 //if end of original file reached but values left in file one they are classed as additions
-                if (positionFile1 >= file1.Length)
+                if (positionFile1 > file1.Length)
                 {
                     //each value left in edited file
                     for (var k = positionFile1; k <= file2.Length; k++)

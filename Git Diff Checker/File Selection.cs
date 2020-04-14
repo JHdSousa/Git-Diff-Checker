@@ -24,26 +24,8 @@ namespace Git_Diff_Checker
         {
             return FileLen;
         }
-        //choosing the first file
-       /* public static void ChooseFiles()
-        {
-            Console.WriteLine(":> [INPUT] ");
-          string [] UserIn  = Console.ReadLine().Split();
-            try
-            {
-                //reading in files as arrays
-            string[] file1 =  GetFile(UserIn[1]);
-            string[] file2 = GetFile(UserIn[2]);
-                //check for command word
-             CommandCheck.CheckCommand(UserIn[0], file1, file2);
-            }
-            catch
-            {
-                Console.WriteLine("Input missing component, please use the format: diif file1.txt fil2.txt");
-            }
-            
-        }*/
-        
+       
+       
         
         //assigns the users choice of file and converts the array to a string each time. 
         //the string is then returned to be used in the comparative function

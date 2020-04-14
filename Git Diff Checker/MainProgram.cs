@@ -23,8 +23,13 @@ namespace Git_Diff_Checker
                     FileSelection file1 = new FileSelection(UserIn[1]);
                     FileSelection file2 = new FileSelection(UserIn[2]);
                     //check for command word
-                    CommandCheck.CheckCommand(UserIn[0], file1.GetContents(), file2.GetContents());
-                    Console.WriteLine("wibble");
+
+                    var message = CommandCheck.ValidCommand(UserIn[0], file1.GetContents(), file2.GetContents());
+
+                    if (!string.IsNullOrEmpty(message))
+                    {
+                        Console.WriteLine(message);
+                    }
                 }
                 catch( Exception ex)
                 {
