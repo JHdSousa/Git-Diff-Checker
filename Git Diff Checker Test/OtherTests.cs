@@ -23,6 +23,15 @@ namespace Git_Diff_Checker_Test
             Assert.AreEqual(expectedSize, actualFile.Length);
         }
 
+        [Test]
+        public void LogFileLocationRetrieval()
+        {
+
+            //action
+            string Location = LogFile.GetLogFile();
+            //assert
+            Assert.AreEqual("C:\\Users\\User\\Documents\\LogFile.txt", Location);
+        }
 
         //[Ignore("not containing a return value needs checking by expert")]
         [Test]

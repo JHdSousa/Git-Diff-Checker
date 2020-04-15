@@ -5,7 +5,7 @@ using System.IO;
 
 namespace Git_Diff_Checker
 {
-    class LogFile
+    public class LogFile
     {
         //method collects the file path used to create a file for the log information
         public static string GetLogFile()
