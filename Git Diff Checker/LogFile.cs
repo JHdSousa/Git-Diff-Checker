@@ -7,24 +7,31 @@ namespace Git_Diff_Checker
 {
     class LogFile
     {
+        //method collects the file path used to create a file for the log information
         public static string GetLogFile()
         {
            return $"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\LogFile.txt";
         }
-        public static void FileCreation(List<Change> differencesList, List<string> ChangedList)
+        //method that write contents to the log file
+        public static void FileCreation(List<Change> differencesList)
         {
-            
+            //try loop to catch any potenial errors
             try
             {
+                //uses stream reader to be able to write into the file
                 using (StreamWriter writer = new StreamWriter(GetLogFile()))
                 {
+                    //each value from the given list are written into the file 
                     foreach (var difference in differencesList)
                     {
-                        writer.WriteLine($"Position {difference.Position} Type {difference.Action}");
+                        writer.WriteLine($"Line Number: {difference.LineNumber} " +
+                            $"Action used: {difference.Action}" +
+                            $"Word: {difference.Word}");
                     }
                 }
 
             }
+            //catch condition for any errors that are thrown
             catch (NullReferenceException) { Console.WriteLine("no values found"); }
         }
     }

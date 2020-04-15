@@ -25,18 +25,6 @@ namespace Git_Diff_Checker
             }
             else
             {
-                int diffs = 0;
-                for (int i =0; i < 5; i++)
-                {
-                    if (file1[i] == file2[i])
-                    {
-                     //   changes[i] = " ";
-                    }
-                    else
-                    {
-                        //changes[i] = i;
-                    }
-                }
                 return changeList;
             }
         }

@@ -43,7 +43,7 @@ namespace Git_Diff_Checker
                 //    }
 
 
-                //LogFile.FileCreation(differences, changeList);
+                LogFile.FileCreation(differences);
                 //    //displays all the differences in the file found, to the user
                 //     foreach (var difference in differences)
                 //    {
