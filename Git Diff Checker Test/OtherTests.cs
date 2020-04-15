@@ -14,8 +14,6 @@ namespace Git_Diff_Checker_Test
         public void FileAcquisition(string fileName, int expectedSize)
         {
             //assign
-            //var file = "1.txt";
-            //var file = new string[] { "This", "is", "a", "file" };
             var gitDiffChecker = new FileSelection(fileName);
             //action
             var actualFile = gitDiffChecker.GetContents();
