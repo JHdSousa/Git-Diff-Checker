@@ -15,6 +15,7 @@ namespace Git_Diff_Checker
             //sets the text colour to white
             Console.ForegroundColor = ConsoleColor.White;
                 //sends the user to select the first file
+                Console.WriteLine();
                 Console.WriteLine(":> [INPUT] ");
                 string[] UserIn = Console.ReadLine().Split();
                 try

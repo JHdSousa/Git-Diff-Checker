@@ -8,7 +8,23 @@ namespace Git_Diff_Checker
     {
         public static void OutputToUser(List<Change>differences, IEnumerable<string>connectedFiles) 
         {
-            
+            Console.Write(":> ");
+            foreach(string differ in connectedFiles)
+            {
+                if (differ != " ")
+                {
+                    Console.Write($" {differ} ");
+                }
+                else
+                {
+                    Console.WriteLine();
+                    Console.Write(":> ");
+                    continue;
+                }
+            }
+
+
+
         }
     }
 }

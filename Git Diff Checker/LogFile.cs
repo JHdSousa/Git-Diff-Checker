@@ -15,24 +15,23 @@ namespace Git_Diff_Checker
         //method that write contents to the log file
         public static void FileCreation(List<Change> differencesList)
         {
-            //try loop to catch any potenial errors
-            try
-            {
+            
                 //uses stream reader to be able to write into the file
                 using (StreamWriter writer = new StreamWriter(GetLogFile()))
                 {
                     //each value from the given list are written into the file 
                     foreach (var difference in differencesList)
                     {
-                        writer.WriteLine($"Line Number: {difference.LineNumber} " +
-                            $"Action used: {difference.Action}" +
-                            $"Word: {difference.Word}");
+                    writer.WriteLine();
+                    writer.WriteLine($"Line Number: {difference.LineNumber} ");
+                    writer.WriteLine($"Action used: {difference.Action}");
+                    writer.WriteLine($"Word: {difference.Word}");
+                    writer.WriteLine();
                     }
                 }
 
-            }
-            //catch condition for any errors that are thrown
-            catch (NullReferenceException) { Console.WriteLine("no values found"); }
+           
+
         }
     }
 }

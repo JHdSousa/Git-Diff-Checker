@@ -3,6 +3,7 @@
     public enum Actions
     {
         Addition, 
-        Removal
+        Removal,
+        Unchanged
     }
 }

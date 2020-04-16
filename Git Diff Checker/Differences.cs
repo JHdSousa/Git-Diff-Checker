@@ -176,7 +176,7 @@ namespace Git_Diff_Checker
                     while (positionFile1 + possibleFile1Offset <= file1.Length)
                     {
                         //as long as the current position is not longer then the file length or postion is not the same as the one in original file
-                        if (file1.Length-1 > positionFile1 + possibleFile1Offset && file1[positionFile1 + possibleFile1Offset] != file2[positionFile2])
+                        if (file1.Length-1 >= positionFile1 + possibleFile1Offset && file1[positionFile1 + possibleFile1Offset] != file2[positionFile2])
                         {
                             //a possible removal has been found and added to the list, continaing enums for position and action
                             possibleRemovals.Add(new Change { Word = file2[positionFile1 + possibleFile1Offset], Position = positionFile1 + possibleFile1Offset, LineNumber = LineNumber, Action = action });
