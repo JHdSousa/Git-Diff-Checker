@@ -61,7 +61,7 @@ namespace Git_Diff_Checker.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This is a file.
+        ///   Looks up a localized string similar to A repository is This is a file.
         /// </summary>
         internal static string file1 {
             get {

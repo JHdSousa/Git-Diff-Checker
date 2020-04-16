@@ -23,7 +23,7 @@ namespace Git_Diff_Checker
                 //looks for additions in the file and creates a list variable
                 var differences = new Addition().Changes(file1, file2, Actions.Addition);
                 //adds more values to the list if there are removals also found in the file
-                differences.AddRange(new Removed().Changes(file1, file2, Actions.Removal));
+                //differences.AddRange(new Removed().Changes(file1, file2, Actions.Removal));
                 //joines the two original files into one file contianing all the changes within it
                 IEnumerable<string> changedFile = (from theFiles in file1.Union(file2)
                                             select theFiles).ToList<string>();

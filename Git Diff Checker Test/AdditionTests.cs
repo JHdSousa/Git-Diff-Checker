@@ -44,8 +44,8 @@ namespace Git_Diff_Checker_Test
 
             // assert
             //Assert.Throws<Exception>(() => gitDiffChecker.Changes(stringOrig, stringNew, Actions.Addition));
-            Assert.AreEqual(0, actualChanges.Count);
-            //Assert.True(actualChanges.All(x => x.Word == "1"));
+            Assert.AreEqual(1, actualChanges.Count);
+            Assert.True(actualChanges.All(x => x.Word == "1"));
         }
 
         [Test]
