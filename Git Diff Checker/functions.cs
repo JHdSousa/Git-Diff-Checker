@@ -24,31 +24,14 @@ namespace Git_Diff_Checker
                 var differences = new Addition().Changes(file1, file2, Actions.Addition);
                 //adds more values to the list if there are removals also found in the file
                 differences.AddRange(new Removed().Changes(file1, file2, Actions.Removal));
-                List<string> changeList = new List<string>();
-                //    for(int i = 0; i<file1.Length; i++)
-                //    {
-                //        foreach (var difference in differences)
-                //        {
-                //            if (difference.Position == i )// &&  difference.Action = Actions.Removal)
-                //            {
-                //                changeList.Add(difference.Word);
-                //                break;
-                //            }
-                //            else
-                //            {
-                //                changeList.Add(file1[i]);
-                //                break;
-                //            }
-                //        }                   
-                //    }
+                //joines the two original files into one file contianing all the changes within it
+                IEnumerable<string> changedFile = from theFiles in file1.Union(file2)
+                                            select theFiles;
+                Display.OutputToUser(differences, changedFile);
 
 
                 LogFile.FileCreation(differences);
-                //    //displays all the differences in the file found, to the user
-                //     foreach (var difference in differences)
-                //    {
-                //        Console.WriteLine($"Position {difference.Position} Type {difference.Action}");
-                //    }
+
                 return string.Empty;
             
             }
