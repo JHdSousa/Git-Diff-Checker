@@ -34,7 +34,7 @@ namespace Git_Diff_Checker
                 }
                 catch( Exception ex)
                 {
-                    Console.WriteLine("Input missing component, please use the format: diif file1.txt fil2.txt");
+                    Console.WriteLine("Input missing component, please use the format: diff file1.txt fil2.txt");
                 }
                 //FileSelection.ChooseFiles();
 

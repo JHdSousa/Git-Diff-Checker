@@ -8,11 +8,11 @@ namespace Git_Diff_Checker_Test
 {
     public class AdditionTests
     {
-        private Addition _gitDiffChecker;
+        private DetailedDiff _gitDiffChecker;
         [SetUp]
         public void Setup()
         {
-            _gitDiffChecker = new Addition();
+            _gitDiffChecker = new DetailedDiff();
         }
         
 

@@ -25,7 +25,18 @@ namespace Git_Diff_Checker
             return FileLen;
         }
        
-       
+       private static string[] RemoveExtraSpaces(string[] file)
+        {
+            List<string> editFile = new List<string> { };
+            for (var i = 0; i < file.Length ; i++)
+            {
+                if(!(file[i] == string.Empty && file[i+1] == string.Empty))
+                {
+                    editFile.Add(file[i]);
+                }
+            }
+            return editFile.ToArray();
+        }
         
         //assigns the users choice of file and converts the array to a string each time. 
         //the string is then returned to be used in the comparative function
@@ -66,7 +77,8 @@ namespace Git_Diff_Checker
                     file = Properties.Resources.file1.Split();
                     break;
             }
-            return file;
+            
+            return RemoveExtraSpaces(file);
         }
 
 

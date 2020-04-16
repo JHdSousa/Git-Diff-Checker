@@ -8,7 +8,7 @@ namespace Git_Diff_Checker_Test
     public class OtherTests
     {
         [Test]
-        [TestCase("1.txt", 4)]
+        [TestCase("1.txt", 6)]
         [TestCase("2.txt", 5)]
         [TestCase("3.txt", 3)]
         public void FileAcquisition(string fileName, int expectedSize)
