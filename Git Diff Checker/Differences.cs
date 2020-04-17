@@ -126,15 +126,15 @@ namespace Git_Diff_Checker
                 }
 
                 //if the ends of either of the files have been reached
-                //if it is the end of file 1
-                if (!HelperFunctions.EndOfFile(file1, positionFile1))
+                //if it is not the end of file 1
+                if (!HelperFunctions.EndOfFile(file2, positionFile2))
                 {
                     //the rest of file two is added and they are marked as removals as they are not in the first file as it has no contents left ot check
                     changeList.AddRange(HelperFunctions.ReadToEnd(file2, positionFile2, Actions.Removal, ConsoleColor.Red));
                 }
 
-                //if the end of file 2 has been reached
-                if (!HelperFunctions.EndOfFile(file2, positionFile2))
+                //if the end of file 1 has not been reached
+                if (!HelperFunctions.EndOfFile(file1, positionFile1))
                 {
                     //the rest of file two is added and they are marked as removals as they are not in the first file as it has no contents left ot check
                     changeList.AddRange(HelperFunctions.ReadToEnd(file1, positionFile1, Actions.Addition, ConsoleColor.Green));

@@ -11,13 +11,13 @@ namespace Git_Diff_Checker_Test
         [TestCase("1.txt", 6)]
         [TestCase("2.txt", 5)]
         [TestCase("3.txt", 3)]
-        [TestCase("GitRepositories_1a.txt",79)]
-        [TestCase("GitRepositories_1b.txt",79)]
-        [TestCase("GitRepositories_2a.txt",100)]
-        [TestCase("GitRepositories_2b.txt",100)]
-        [TestCase("GitRepositories_3a.txt",135)]
-        [TestCase("GitRepositories_3b.txt",136)]
-        public void FileAcquisition(string fileName, int expectedSize)
+        [TestCase("GitRepositories_1a.txt", 79)]
+        [TestCase("GitRepositories_1b.txt", 79)]
+        [TestCase("GitRepositories_2a.txt", 100)]
+        [TestCase("GitRepositories_2b.txt", 100)]
+        [TestCase("GitRepositories_3a.txt", 135)]
+        [TestCase("GitRepositories_3b.txt", 136)]
+        public void SelectedFileConents(string fileName, int expectedSize)
         {
             //assign
             var gitDiffChecker = new FileSelection(fileName);
@@ -39,27 +39,32 @@ namespace Git_Diff_Checker_Test
 
         //[Ignore("not containing a return value needs checking by expert")]
         [Test]
-        
-        public void FileCheck()
+        [TestCase(new string[] { "1", "2" }, null)]
+        [TestCase(null, new string[] { "1", "2" })]
+        [TestCase(null, null)]
+        public void FileCheckInvalidFilesThrown(string[] origFile, string[] newFile)
         {
             
             //assign
-            string[] stringOrig = null;
-            var stringNew = new string[] { "1", "2" };
+            //string[] stringOrig = null;
+            //var stringNew = new string[] { "1", "2" };
             var functionInput = "diff";
+            //string[] stringNew1 = null;
+            //var stringOrig1 = new string[] { "1", "2" };
             //action
             //Git_Diff_Checker.CommandCheck.CheckCommand(functionInput, stringNew, stringOrig);
 
             //assert
-            Assert.Throws<NullReferenceException>(() => Git_Diff_Checker.CommandCheck.ValidCommand(functionInput, stringNew, stringOrig));
+            Assert.Throws<NullReferenceException>(() => Git_Diff_Checker.CommandCheck.ValidCommand(functionInput, newFile, origFile));
         }
+
         [Test]
         [TestCase("dif")]
         [TestCase(" ")]
         [TestCase("123")]
         [TestCase("iff")]
         [TestCase("Diff")]
-        public void CheckForInvalidCommand(string commandIn)
+        public void InvalidCommandsReturnCorrectError(string commandIn)
         {
             //assign
             string[] stringOrig = { "1", "2" };
