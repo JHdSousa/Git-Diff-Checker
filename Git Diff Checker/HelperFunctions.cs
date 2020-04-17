@@ -62,13 +62,13 @@ namespace Git_Diff_Checker
                 //values added to the possible changes list
                 possibleChanges.Add(new Change { Word = file[i], Position = i, LineNumber = lineNumber, Action = action, WordColour = colour });
             }
-            //when the match flag is not updated
-            if (!foundMatch)
-            {
-                //changes list is set to null 
-                possibleChanges = null;
-            }
-            //possible changes are returned
+            ////when the match flag is not updated
+            //if (!foundMatch)
+            //{
+            //    //changes list is set to null 
+            //    possibleChanges = null;
+            //}
+            ////possible changes are returned
             return possibleChanges;
         }
 
@@ -104,6 +104,28 @@ namespace Git_Diff_Checker
             //change list returned
             return possibleChanges;
         }
+
+        public static List<Change> MergeReadAhead(List<Change> possibleAdditions, List<Change> possibleRemovals) 
+        {
+            List<Change> mergedChanges = new List<Change>();
+            for (int i = 0; i < Math.Min(possibleAdditions.Count, possibleRemovals.Count); i++)
+            {
+                
+                if(possibleAdditions[i].Word == possibleRemovals[i].Word)
+                {
+                    break;
+                    //mergedChanges.Add(new Change { Word = possibleAdditions[i].Word, Position = possibleAdditions[i].Position, LineNumber = possibleAdditions[i].LineNumber, Action = Actions.Unchanged, WordColour = ConsoleColor.White});
+                }
+                else
+                {
+                    mergedChanges.Add(new Change { Word = possibleRemovals[i].Word, Position = possibleRemovals[i].Position, LineNumber = possibleRemovals[i].LineNumber, Action = possibleRemovals[i].Action, WordColour = possibleRemovals[i].WordColour });
+                    mergedChanges.Add(new Change { Word = possibleAdditions[i].Word, Position = possibleAdditions[i].Position, LineNumber = possibleAdditions[i].LineNumber, Action = possibleAdditions[i].Action, WordColour = possibleAdditions[i].WordColour });
+                }
+            }
+            return mergedChanges;
+
+        }
+
     }
 
 }

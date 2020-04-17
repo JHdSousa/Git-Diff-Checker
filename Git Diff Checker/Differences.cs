@@ -80,48 +80,48 @@ namespace Git_Diff_Checker
                         List<Change> possibleAdditions = HelperFunctions.ReadAhead(file2[positionFile2], file1, positionFile1, Actions.Addition, ConsoleColor.Green);
                         //list created to hold possible Removals that the application has come across in the file
                         List<Change> possibleRemovals = HelperFunctions.ReadAhead(file1[positionFile1], file2, positionFile2, Actions.Removal, ConsoleColor.Red);
+                        List<Change> MergedChanges = HelperFunctions.MergeReadAhead(possibleAdditions, possibleRemovals);
 
-                        //check if both lists came back as null vales, causes a break from the loop
-                        if (possibleAdditions == null && possibleRemovals == null)
-                        {
-                            break;
-                        }
-                        //if there were no additions found
-                        if (possibleAdditions == null)
-                        {
-                            //the removals are added to the changlist
-                            changeList.AddRange(possibleRemovals);
-                            //position in the files are ammended so that the section tat been added will not be rechecked
-                            positionFile2 += possibleRemovals.Count;
-                        }
+                        changeList.AddRange(MergedChanges);
 
-                        //if there are no removals
-                        if (possibleRemovals == null)
-                        {
-                            //the additions are added to the changelist
-                            changeList.AddRange(possibleAdditions);
-                            //position in the files are ammended so that the section tat been added will not be rechecked
-                            positionFile1 += possibleAdditions.Count;
-                        }
-                        //if there are values in both of the lists
-                        if (possibleRemovals != null && possibleAdditions != null)
-                        {
-                            //the shortest of the two is the one that weill be added to the changelist
-                            if (possibleRemovals.Count < possibleAdditions.Count)
-                            {
-                                //here removals are added to the changelist
-                                changeList.AddRange(possibleRemovals);
-                                //position in the files are ammended so that the section tat been added will not be rechecked
-                                positionFile2 += possibleRemovals.Count;
-                            }
-                            else
-                            {
-                                //here additions are added to the changelist
-                                changeList.AddRange(possibleAdditions);
-                                //position in the files are ammended so that the section tat been added will not be rechecked
-                                positionFile1 += possibleAdditions.Count;
-                            }
-                        }
+                        positionFile1 += MergedChanges.Count(x => x.Action != Actions.Removal);
+                        positionFile2 += MergedChanges.Count(x => x.Action != Actions.Addition);
+
+                //        if (possibleAdditions == null)
+                //        {
+                //            //the removals are added to the changlist
+                //            changeList.AddRange(possibleRemovals);
+                //            //position in the files are ammended so that the section tat been added will not be rechecked
+                //            positionFile2 += possibleRemovals.Count;
+                //        }
+
+                //        //if there are no removals
+                //        if (possibleRemovals == null)
+                //        {
+                //            //the additions are added to the changelist
+                //            changeList.AddRange(possibleAdditions);
+                //            //position in the files are ammended so that the section tat been added will not be rechecked
+                //            positionFile1 += possibleAdditions.Count;
+                //        }
+                //        //if there are values in both of the lists
+                //        if (possibleRemovals != null && possibleAdditions != null)
+                //        {
+                //            //the shortest of the two is the one that weill be added to the changelist
+                //            if (possibleRemovals.Count < possibleAdditions.Count)
+                //            {
+                //                //here removals are added to the changelist
+                //                changeList.AddRange(possibleRemovals);
+                //                //position in the files are ammended so that the section tat been added will not be rechecked
+                //                positionFile2 += possibleRemovals.Count;
+                //            }
+                //            else
+                //            {
+                //                //here additions are added to the changelist
+                //                changeList.AddRange(possibleAdditions);
+                //                //position in the files are ammended so that the section tat been added will not be rechecked
+                //                positionFile1 += possibleAdditions.Count;
+                //            }
+                //        }
                     }
                 }
 
