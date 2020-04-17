@@ -39,8 +39,8 @@ namespace Git_Diff_Checker_Test
 
         //[Ignore("not containing a return value needs checking by expert")]
         [Test]
-
-        public void CommandCheckFalse()
+        
+        public void FileCheck()
         {
             
             //assign
@@ -54,8 +54,22 @@ namespace Git_Diff_Checker_Test
             Assert.Throws<NullReferenceException>(() => Git_Diff_Checker.CommandCheck.ValidCommand(functionInput, stringNew, stringOrig));
         }
         [Test]
-        public void ValidFile()
+        [TestCase("dif")]
+        [TestCase(" ")]
+        [TestCase("123")]
+        [TestCase("iff")]
+        public void CheckForInvalidCommand(string commandIn)
         {
+            //assign
+            string[] stringOrig = { "1", "2" };
+            var stringNew = new string[] { "1", "2" };
+            //var functionInput = "dirf";
+            //action
+            //Git_Diff_Checker.CommandCheck.CheckCommand(functionInput, stringNew, stringOrig);
+            var returnVal = Git_Diff_Checker.CommandCheck.ValidCommand(commandIn, stringNew, stringOrig);
+
+            //assert
+            Assert.AreEqual(":> [OUTPUT] Unknown command", returnVal);
 
 
         }
