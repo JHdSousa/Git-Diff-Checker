@@ -73,8 +73,8 @@ namespace Git_Diff_Checker
                     else
                     {
                         //list created to hold possible additions that the application has come across in the file
-                        List<Change> possibleAdditions = HelperFunctions.ReadAhead(file2[positionFile2], file1, positionFile1, Actions.Addition, ConsoleColor.Green);
-                        List<Change> possibleRemovals = HelperFunctions.ReadAhead(file1[positionFile1], file2, positionFile2, Actions.Removal, ConsoleColor.Red);
+                        List<Change> possibleAdditions = HelperFunctions.ReadAhead(file2[positionFile2], file1, positionFile1, Actions.Removal, ConsoleColor.Red);
+                        List<Change> possibleRemovals = HelperFunctions.ReadAhead(file1[positionFile1], file2, positionFile2, Actions.Addition, ConsoleColor.Green);
 
                         if (possibleAdditions == null && possibleRemovals == null)
                         {

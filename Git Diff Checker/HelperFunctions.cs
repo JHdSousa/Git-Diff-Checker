@@ -30,7 +30,7 @@ namespace Git_Diff_Checker
 
             for (int i = currentFilePosition; i < file.Length; i++)
             {
-                if (action == Actions.Removal && NewLine(file, i))
+                if (action == Actions.Addition && NewLine(file, i))
                 {
                     lineNumber++;
                 }
@@ -65,7 +65,7 @@ namespace Git_Diff_Checker
 
             for (int i = currentFilePosition; i < file.Length; i++)
             {
-                if (action == Actions.Removal && NewLine(file, i))
+                if (action == Actions.Addition && NewLine(file, i))
                 {
                     lineNumber++;
                 }

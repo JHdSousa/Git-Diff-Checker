@@ -16,7 +16,7 @@ namespace Git_Diff_Checker_Test
         [TestCase("GitRepositories_2a.txt",97)]
         [TestCase("GitRepositories_2b.txt",97)]
         [TestCase("GitRepositories_3a.txt",133)]
-        [TestCase("GitRepositories_3b.txt",133)]
+        [TestCase("GitRepositories_3b.txt",134)]
         public void FileAcquisition(string fileName, int expectedSize)
         {
             //assign
