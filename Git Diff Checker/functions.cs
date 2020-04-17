@@ -20,20 +20,23 @@ namespace Git_Diff_Checker
             }
             else
             {
-                //looks for additions in the file and creates a list variable
+                //looks for differneces in the file and creates a list variable
                 var differences = new DetailedDiff().Changes(file1, file2, Actions.Addition);
+                //if the file returned contains values and is not empty
                 if(differences.Count > 0 )
                 {
+                    //displays the differences to the user
                     Display.OutputToUser(differences);
 
-
+                    //creates a log file that holds all the differences found
                     LogFile.FileCreation(differences);
                 }
                 else
                 {
+                    //if there are no changes a different display function is called
                     Display.NoChange();
                 }
-
+                //returns an empty string if the the displaying and logfile creation was successful
                 return string.Empty;
             
             }
@@ -43,11 +46,12 @@ namespace Git_Diff_Checker
         {
             switch (Command)
             {
+                //when the command given is diff
                 case "diff":
-                    
+                    //runs the test for file exists and returns any errorr messages returned from the check
                     return FileExist(file1,file2);
                     
-                    
+                //when the input is not diff, the user is displayed an errorr message    
                 default:
                     return ":> [OUTPUT] Unknown command";
                     

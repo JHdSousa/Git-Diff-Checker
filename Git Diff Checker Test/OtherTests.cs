@@ -11,12 +11,12 @@ namespace Git_Diff_Checker_Test
         [TestCase("1.txt", 6)]
         [TestCase("2.txt", 5)]
         [TestCase("3.txt", 3)]
-        [TestCase("GitRepositories_1a.txt",77)]
-        [TestCase("GitRepositories_1b.txt",77)]
-        [TestCase("GitRepositories_2a.txt",97)]
-        [TestCase("GitRepositories_2b.txt",97)]
-        [TestCase("GitRepositories_3a.txt",133)]
-        [TestCase("GitRepositories_3b.txt",134)]
+        [TestCase("GitRepositories_1a.txt",79)]
+        [TestCase("GitRepositories_1b.txt",79)]
+        [TestCase("GitRepositories_2a.txt",100)]
+        [TestCase("GitRepositories_2b.txt",100)]
+        [TestCase("GitRepositories_3a.txt",135)]
+        [TestCase("GitRepositories_3b.txt",136)]
         public void FileAcquisition(string fileName, int expectedSize)
         {
             //assign

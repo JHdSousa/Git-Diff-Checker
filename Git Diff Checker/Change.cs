@@ -3,6 +3,7 @@ using System;
 
 namespace Git_Diff_Checker
 {
+    //constructor for the list attributes that can be assigned to a single entry
     public class Change
     {
         public string Word { get; set; }
