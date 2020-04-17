@@ -1,6 +1,7 @@
 ﻿using Git_Diff_Checker.Enums;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Git_Diff_Checker
 {
@@ -77,6 +78,10 @@ namespace Git_Diff_Checker
         {
             return file.Length <= currentFilePosition;
         }
+        public static bool EndOfFile(List<Change> file, int currentFilePosition)
+        {
+            return file.Count <= currentFilePosition;
+        }
 
         //function to return any values left on the end of a file
         public static List<Change> ReadToEnd(string[] file, int currentFilePosition, Actions action, ConsoleColor colour)
@@ -105,25 +110,75 @@ namespace Git_Diff_Checker
             return possibleChanges;
         }
 
+        private static int offsetCount(List<Change> possibleAdditions, List<Change> possibleRemovals, int offset)
+        {
+            bool firstFound = false;
+            bool nextDifference = false;
+            int matchCount = 0;
+            int addPosition = 0;
+            int removePosition = 0;
+
+            if (possibleAdditions.Count < possibleRemovals.Count)
+            {
+                removePosition = offset;
+            }
+            else
+            {
+                addPosition = offset;
+            }
+
+            while (!nextDifference && !EndOfFile(possibleAdditions, addPosition) && !EndOfFile(possibleRemovals, removePosition)) 
+            {
+                if(possibleAdditions[addPosition].Word == possibleRemovals[removePosition].Word)
+                {
+                    firstFound = true;
+                    matchCount++;
+                }
+                if(firstFound && possibleAdditions[addPosition].Word != possibleRemovals[removePosition].Word)
+                {
+                    nextDifference = true;
+                }
+                addPosition++;
+                removePosition++;
+            
+            }
+            return matchCount; 
+        }
+
         public static List<Change> MergeReadAhead(List<Change> possibleAdditions, List<Change> possibleRemovals) 
         {
-            List<Change> mergedChanges = new List<Change>();
-            for (int i = 0; i < Math.Min(possibleAdditions.Count, possibleRemovals.Count); i++)
+            var shorterList = Math.Min(possibleAdditions.Count, possibleRemovals.Count);
+            var longerList = Math.Max(possibleAdditions.Count, possibleRemovals.Count);
+            Dictionary<int, int> matchCount = new Dictionary<int, int>();
+
+            for(int i = 0; i < longerList - shorterList; i++)
             {
-                
-                if(possibleAdditions[i].Word == possibleRemovals[i].Word)
+                matchCount.Add(i, offsetCount(possibleAdditions, possibleRemovals, i));
+            }
+
+            var j = matchCount.FirstOrDefault(x => x.Value == matchCount.Values.Max()).Key;
+            List<Change> mergedChanges = new List<Change>();
+            int k = 0;
+            while(k < j)
+            {
+                mergedChanges.Add(new Change { Word = possibleAdditions[k].Word, Position = possibleAdditions[k].Position, LineNumber = possibleAdditions[k].LineNumber, Action = possibleAdditions[k].Action, WordColour = possibleAdditions[k].WordColour });
+                k++;
+            }
+            
+
+            for (int i = 0; i < shorterList; i++)
+            {                
+                if(possibleAdditions[i+j].Word == possibleRemovals[i].Word)
                 {
                     break;
                     //mergedChanges.Add(new Change { Word = possibleAdditions[i].Word, Position = possibleAdditions[i].Position, LineNumber = possibleAdditions[i].LineNumber, Action = Actions.Unchanged, WordColour = ConsoleColor.White});
                 }
-                else
-                {
-                    mergedChanges.Add(new Change { Word = possibleRemovals[i].Word, Position = possibleRemovals[i].Position, LineNumber = possibleRemovals[i].LineNumber, Action = possibleRemovals[i].Action, WordColour = possibleRemovals[i].WordColour });
-                    mergedChanges.Add(new Change { Word = possibleAdditions[i].Word, Position = possibleAdditions[i].Position, LineNumber = possibleAdditions[i].LineNumber, Action = possibleAdditions[i].Action, WordColour = possibleAdditions[i].WordColour });
-                }
-            }
-            return mergedChanges;
 
+                  mergedChanges.Add(possibleAdditions[i + j]);
+                  mergedChanges.Add(possibleRemovals[i]);
+            }
+
+            return mergedChanges;
         }
 
     }
