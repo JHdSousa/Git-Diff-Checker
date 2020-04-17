@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Git_Diff_Checker
 {
     class Display
     {
+        public static void NoChange() 
+        {
+            Console.WriteLine(":> These files are the same");
+        }
         public static void OutputToUser(List<Change>differences) 
         {
             var lineNumber = 0;
@@ -17,17 +20,11 @@ namespace Git_Diff_Checker
                     if(lineNumber != difference.LineNumber)
                     {
                         Console.WriteLine();
-                        Console.Write($":> Line {difference.LineNumber}", Console.ForegroundColor = ConsoleColor.DarkYellow);
+                        Console.Write($":> Line: {difference.LineNumber}", Console.ForegroundColor = ConsoleColor.Blue);
                         lineNumber = difference.LineNumber;
                     }
                     Console.Write($" {difference.Word} ", Console.ForegroundColor = difference.WordColour);
-                }
-                //else
-                //{
-                //    Console.WriteLine();
-                //    Console.Write(":> ");
-                //    continue;
-                //}
+                }                
             }
 
             Console.WriteLine();

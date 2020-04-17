@@ -160,9 +160,9 @@ namespace Git_Diff_Checker.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to After initializing a pull request, you will see a review page that shows a high-level overview of the changes between your branch (the compare branch) and the repository&apos;s base branch. You can add a summary of the proposed changes, review the changes made by commits, add labels, milestones, and assignees, and @mention individual contributors or teams. For more information, see &quot;Creating a pull request.&quot;
+        ///   Looks up a localized string similar to After initializing a pull request, you&apos;ll see a review page that shows a high-level overview of the changes between your branch (the compare branch) and the repository&apos;s base branch. You can add a summary of the proposed changes, review the changes made by commits, add labels, milestones, and assignees, and @mention individual contributors or teams. For more information, see &quot;Creating a pull request.&quot;
         ///
-        ///Once you&apos;ve created a pull request, you can push commits from your topic branch to add them to the exi [rest of string was truncated]&quot;;.
+        ///Once you&apos;ve created a pull request, you can push commits from your topic branch to add them to your exis [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string GitRepositories_3b {
             get {

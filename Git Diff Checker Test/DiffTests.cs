@@ -6,7 +6,7 @@ using Git_Diff_Checker.Enums;
 
 namespace Git_Diff_Checker_Test
 {
-    public class AdditionTests
+    public class DiffTests
     {
         private DetailedDiff _gitDiffChecker;
         [SetUp]
@@ -19,7 +19,7 @@ namespace Git_Diff_Checker_Test
         //testing diff function
         //testing looking for additions
         [Test]
-        public void HandlesBothArraysEmptyAdd()
+        public void HandlesBothArraysEmpty()
         {
             // assign
             var stringOrig = new string[] {  };
@@ -33,7 +33,7 @@ namespace Git_Diff_Checker_Test
         }
 
         [Test]
-        public void HandlesEditedArrayEmptyAdd()
+        public void HandlesEditedArrayEmpty()
         {
             // assign
             var stringOrig = new string[] { "1" };
@@ -49,7 +49,7 @@ namespace Git_Diff_Checker_Test
         }
 
         [Test]
-        public void HandlesOriginalArrayEmptyAdd()
+        public void HandlesOriginalArrayEmpty()
         {
             // assign
             var stringOrig = new string[] { };
@@ -65,7 +65,7 @@ namespace Git_Diff_Checker_Test
         }
 
         [Test]
-        public void HandlesBothArraysSameAdd()
+        public void HandlesBothArraysSame()
         {
             // assign
             var stringOrig = new string[] { "1","2" };

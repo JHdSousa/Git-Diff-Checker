@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
 using Git_Diff_Checker.Enums;
 
@@ -66,7 +65,7 @@ namespace Git_Diff_Checker
                     if (file1[positionFile1] == file2[positionFile2])//for when the values are the same
                     {
                         //both positions are increased
-                        changeList.Add(HelperFunctions.ReadUnchanged(file1,positionFile1));
+                        changeList.Add(HelperFunctions.ReadUnchanged(file1, positionFile1));
                         positionFile2++;
                         positionFile1++;
                         continue;
@@ -76,8 +75,8 @@ namespace Git_Diff_Checker
                         //list created to hold possible additions that the application has come across in the file
                         List<Change> possibleAdditions = HelperFunctions.ReadAhead(file2[positionFile2], file1, positionFile1, Actions.Addition, ConsoleColor.Green);
                         List<Change> possibleRemovals = HelperFunctions.ReadAhead(file1[positionFile1], file2, positionFile2, Actions.Removal, ConsoleColor.Red);
-                        
-                        if(possibleAdditions == null && possibleRemovals == null)
+
+                        if (possibleAdditions == null && possibleRemovals == null)
                         {
                             break;
                         }
@@ -106,15 +105,15 @@ namespace Git_Diff_Checker
                                 positionFile1 += possibleAdditions.Count;
                             }
                         }
-                    } 
+                    }
                 }
 
-                if(!HelperFunctions.EndOfFile(file2, positionFile2))
+                if (!HelperFunctions.EndOfFile(file2, positionFile2))
                 {
                     changeList.AddRange(HelperFunctions.ReadToEnd(file2, positionFile2, Actions.Removal, ConsoleColor.Red));
                 }
 
-                if (!HelperFunctions.EndOfFile(file1, positionFile1)) 
+                if (!HelperFunctions.EndOfFile(file1, positionFile1))
                 {
                     changeList.AddRange(HelperFunctions.ReadToEnd(file1, positionFile1, Actions.Addition, ConsoleColor.Green));
                 }

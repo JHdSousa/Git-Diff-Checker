@@ -22,13 +22,17 @@ namespace Git_Diff_Checker
             {
                 //looks for additions in the file and creates a list variable
                 var differences = new DetailedDiff().Changes(file1, file2, Actions.Addition);
-                //adds more values to the list if there are removals also found in the file
-                //differences.AddRange(new Removed().Changes(file1, file2, Actions.Removal));
-               
-                Display.OutputToUser(differences);
+                if(differences.Count > 0 )
+                {
+                    Display.OutputToUser(differences);
 
 
-                LogFile.FileCreation(differences);
+                    LogFile.FileCreation(differences);
+                }
+                else
+                {
+                    Display.NoChange();
+                }
 
                 return string.Empty;
             

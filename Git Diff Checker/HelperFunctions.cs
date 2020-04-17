@@ -1,14 +1,12 @@
 ﻿using Git_Diff_Checker.Enums;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Git_Diff_Checker
 {
     public static class HelperFunctions
     {
         private static int lineNumber = 1;
-
 
         private static bool NewLine(string[] file, int currentFilePosition)
         {
@@ -18,38 +16,38 @@ namespace Git_Diff_Checker
         public static Change ReadUnchanged(string[] file, int currentFilePosition)
         {
             return new Change { Word = file[currentFilePosition], Position = currentFilePosition, LineNumber = lineNumber, Action = Actions.Unchanged, WordColour = ConsoleColor.White };
-            
         }
 
         public static List<Change> ReadAhead(string searchString, string[] file, int currentFilePosition, Actions action, ConsoleColor colour)
         {
             bool foundMatch = false;
             List<Change> possibleChanges = new List<Change>();
-            if(file.Length == currentFilePosition)
+
+            if (file.Length == currentFilePosition)
             {
                 return possibleChanges;
             }
-            for(int i = currentFilePosition; i < file.Length; i++)
+
+            for (int i = currentFilePosition; i < file.Length; i++)
             {
-                if(action == Actions.Removal && NewLine(file, i))
-                {                    
+                if (action == Actions.Removal && NewLine(file, i))
+                {
                     lineNumber++;
                 }
-                if(searchString == file[i])
+                if (searchString == file[i])
                 {
                     foundMatch = true;
                     break;
                 }
-                //if(file[i] != "")
-                //{
-                possibleChanges.Add(new Change { Word = file[i], Position = i, LineNumber = lineNumber, Action = action, WordColour = colour });
-                //}
 
+                possibleChanges.Add(new Change { Word = file[i], Position = i, LineNumber = lineNumber, Action = action, WordColour = colour });
             }
+
             if (!foundMatch)
             {
                 possibleChanges = null;
             }
+
             return possibleChanges;
         }
         public static bool EndOfFile(string[] file, int currentFilePosition)
@@ -64,15 +62,14 @@ namespace Git_Diff_Checker
             {
                 return possibleChanges;
             }
+
             for (int i = currentFilePosition; i < file.Length; i++)
             {
                 if (action == Actions.Removal && NewLine(file, i))
                 {
                     lineNumber++;
                 }
-
-                    possibleChanges.Add(new Change { Word = file[i], Position = i, LineNumber = lineNumber, Action = action, WordColour = colour });
-
+                possibleChanges.Add(new Change { Word = file[i], Position = i, LineNumber = lineNumber, Action = action, WordColour = colour });
             }
             return possibleChanges;
         }

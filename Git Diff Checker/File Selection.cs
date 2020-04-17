@@ -1,9 +1,4 @@
-﻿using System;
-using System.Reflection;
-using System.IO;
-using System.Collections.Generic;
-using Git_Diff_Checker.Properties;
-
+﻿using System.Collections.Generic;
 
 namespace Git_Diff_Checker
 {
@@ -55,6 +50,10 @@ namespace Git_Diff_Checker
 
                 case "GitRepositories_2a.txt":
                     file = Properties.Resources.GitRepositories_2a.Split();
+                    break;
+
+                case "GitRepositories_2b.txt":
+                    file = Properties.Resources.GitRepositories_2b.Split();
                     break;
 
                 case "GitRepositories_3a.txt":
