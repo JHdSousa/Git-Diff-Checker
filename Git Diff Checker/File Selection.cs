@@ -25,9 +25,14 @@ namespace Git_Diff_Checker
             List<string> editFile = new List<string> { };
             for (var i = 0; i < file.Length ; i++)
             {
-                if(!(file[i] == string.Empty && file[i+1] == string.Empty))
+                if(!(file[i] == string.Empty && file[i + 1] == string.Empty))
                 {
                     editFile.Add(file[i]);
+                }else if (file[i] == string.Empty && file[i + 1] == string.Empty && file[i + 2] == string.Empty)
+                {
+                    editFile.Add(file[i]);
+                    editFile.Add(file[i+1]);
+                    i+=2;
                 }
             }
             return editFile.ToArray();

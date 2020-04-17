@@ -23,8 +23,8 @@ namespace Git_Diff_Checker
                     //reading in files as arrays
                     FileSelection file1 = new FileSelection(UserIn[1]);
                     FileSelection file2 = new FileSelection(UserIn[2]);
+                    
                     //check for command word
-
                     var message = CommandCheck.ValidCommand(UserIn[0], file1.GetContents(), file2.GetContents());
 
                     if (!string.IsNullOrEmpty(message))
@@ -34,6 +34,7 @@ namespace Git_Diff_Checker
                 }
                 catch( Exception ex)
                 {
+                    //catch if there are missing parts to the input
                     Console.WriteLine("Input missing component, please use the format: diff file1.txt fil2.txt");
                 }
                 //FileSelection.ChooseFiles();

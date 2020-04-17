@@ -58,6 +58,7 @@ namespace Git_Diff_Checker_Test
         [TestCase(" ")]
         [TestCase("123")]
         [TestCase("iff")]
+        [TestCase("Diff")]
         public void CheckForInvalidCommand(string commandIn)
         {
             //assign

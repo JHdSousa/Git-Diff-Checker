@@ -8,6 +8,11 @@ namespace Git_Diff_Checker
     {
         private static int lineNumber = 1;
 
+        public static void ResetLineNumber()
+        {
+            lineNumber = 1;
+        }
+
         private static bool NewLine(string[] file, int currentFilePosition)
         {
             return (file[currentFilePosition] == "");
