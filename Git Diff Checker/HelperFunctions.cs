@@ -169,8 +169,8 @@ namespace Git_Diff_Checker
                     break;
                 }
 
-                  mergedChanges.Add(longerList[i + offset]);
-                  mergedChanges.Add(shorterList[i]);
+                mergedChanges.Add(longerList[i + offset]);
+                mergedChanges.Add(shorterList[i]);
             }
             return mergedChanges;
         }
