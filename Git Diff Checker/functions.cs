@@ -14,7 +14,6 @@ namespace Git_Diff_Checker
             //checks that the file array isnt empty
             if (file1.Length == 0 || file2.Length == 0)
             {
-                //if it is empty then the file entered could not be found by the system 
                 return ":> [OUTPUT] One of the files selected does not exist";
             }
             else
@@ -26,10 +25,7 @@ namespace Git_Diff_Checker
                 if (differences.Count > 0)
                 {
                     differences = HelperFunctions.SetLineNumbers(differences);
-                    //displays the differences to the user
                     Display.OutputToUser(differences);
-
-                    //creates a log file that holds all the differences found
                     LogFile.FileCreation(differences);
                 }
                 else
@@ -49,8 +45,7 @@ namespace Git_Diff_Checker
             switch (Command)
             {
                 //when the command given is diff
-                case "diff":
-                    //runs the test for file exists and returns any errorr messages returned from the check
+                case "diff":                    
                     return FileExist(file1, file2);
 
                 //when the input is not diff, the user is displayed an errorr message    
