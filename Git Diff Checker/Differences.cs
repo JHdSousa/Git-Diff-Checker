@@ -42,7 +42,6 @@ namespace Git_Diff_Checker
         
         public override List<Change> Changes(string[] file1, string[] file2, Actions action)
         {
-            HelperFunctions.ResetLineNumber();
             int[] changes = new int[] { };
             List<Change> changeList = new List<Change>();
 

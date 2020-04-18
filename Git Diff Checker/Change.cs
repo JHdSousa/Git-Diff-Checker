@@ -8,7 +8,7 @@ namespace Git_Diff_Checker
     {
         public string Word { get; set; }
         public int Position { get; set; }
-        public int LineNumber { get; set; }
+        public int LineNumber { get; set; } = 0;
         public Actions Action { get; set; }
         public ConsoleColor WordColour { get; set;} 
     }

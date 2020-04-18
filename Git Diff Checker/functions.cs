@@ -25,6 +25,7 @@ namespace Git_Diff_Checker
                 //if the file returned contains values and is not empty
                 if (differences.Count > 0)
                 {
+                    differences = HelperFunctions.SetLineNumbers(differences);
                     //displays the differences to the user
                     Display.OutputToUser(differences);
 
