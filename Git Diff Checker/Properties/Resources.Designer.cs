@@ -61,6 +61,33 @@ namespace Git_Diff_Checker.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A repository This is a file.
+        /// </summary>
+        internal static string file1 {
+            get {
+                return ResourceManager.GetString("file1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This is a small file.
+        /// </summary>
+        internal static string file2 {
+            get {
+                return ResourceManager.GetString("file2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This is file.
+        /// </summary>
+        internal static string file3 {
+            get {
+                return ResourceManager.GetString("file3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A repository is like a folder for your project. Your project&apos;s repository contains all of your project&apos;s files and stores each file&apos;s revision history. You can also discuss and manage your project&apos;s work within the repository.
         ///
         ///You can own repositories individually, or you can share ownership of repositories with other people in an organization.

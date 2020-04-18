@@ -1,52 +1,61 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-
+using System.Linq;
+using Git_Diff_Checker.Enums;
 
 namespace Git_Diff_Checker
 {
-    class functions
+    public class CommandCheck
     {
-        //function to compare the two files 
-        public static void diff(string file1, string file2)
+        //checks the two files both exist before trying to find differences
+        private static string FileExist(string[] file1, string[] file2)
         {
-            if (file1 == "" || file2 == "")
+            //checks that the file array isnt empty
+            if (file1.Length == 0 || file2.Length == 0)
             {
-                Console.WriteLine(":> [OUTPUT] One of these files does not exist");
+                //if it is empty then the file entered could not be found by the system 
+                return ":> [OUTPUT] One of the files selected does not exist";
             }
             else
             {
-                if (file1 == file2)
+                //looks for differneces in the file and creates a list variable
+                List<Change> differences = new DetailedDiff().Changes(file1, file2, Actions.Addition);
+
+                //if the file returned contains values and is not empty
+                if (differences.Count > 0)
                 {
-                    //if it is a match the text becomes green and the user is told the files are the same
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("The files are the same", Console.ForegroundColor);
+                    differences = HelperFunctions.SetLineNumbers(differences);
+                    //displays the differences to the user
+                    Display.OutputToUser(differences);
+
+                    //creates a log file that holds all the differences found
+                    LogFile.FileCreation(differences);
                 }
                 else
                 {
-                    //if it is a match the text becomes red and the user is told the files are not the same
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("The files are different", Console.ForegroundColor);
+                    //if there are no changes a different display function is called
+                    Display.NoChange();
                 }
+
+                //returns an empty string if the the displaying and logfile creation was successful
+                return string.Empty;
             }
-            
         }
-        public static void CheckCommand(string Command, string file1, string file2)
+
+        //checks command word entered by the user
+        public static string ValidCommand(string Command, string[] file1, string[] file2)
         {
             switch (Command)
             {
+                //when the command given is diff
                 case "diff":
-                    try
-                    {
-                        diff(file1,file2);
-                    }
-                    catch (NullReferenceException )
-                    {
-                    }
-                    break;
+                    //runs the test for file exists and returns any errorr messages returned from the check
+                    return FileExist(file1, file2);
+
+                //when the input is not diff, the user is displayed an errorr message    
                 default:
-                    Console.WriteLine(":> [OUTPUT] Unknown command");
-                    break;
+                    return ":> [OUTPUT] Unknown command";
             }
         }
     }
