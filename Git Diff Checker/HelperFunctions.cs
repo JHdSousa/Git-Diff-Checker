@@ -35,14 +35,17 @@ namespace Git_Diff_Checker
         {
             //bool to flag when a match is found
             bool foundMatch = false;
+
             //new list is created to hold possibles
             List<Change> possibleChanges = new List<Change>();
+
             //when the end of the file is reached
             if (file.Length == currentFilePosition)
             {
                 //changes found get returned
                 return possibleChanges;
             }
+
             //loops through the file from the specified position until the end of the file is met
             for (int i = currentFilePosition; i < file.Length; i++)
             {
@@ -53,6 +56,7 @@ namespace Git_Diff_Checker
                     lineNumber++;
 
                 }
+
                 //if the searchstring is found
                 if (searchString == file[i])
                 {
@@ -60,16 +64,11 @@ namespace Git_Diff_Checker
                     foundMatch = true;
                     break;
                 }
+
                 //values added to the possible changes list
                 possibleChanges.Add(new Change { Word = file[i], Position = i, LineNumber = lineNumber, Action = action, WordColour = colour });
             }
-            ////when the match flag is not updated
-            //if (!foundMatch)
-            //{
-            //    //changes list is set to null 
-            //    possibleChanges = null;
-            //}
-            ////possible changes are returned
+
             return possibleChanges;
         }
 
@@ -78,6 +77,7 @@ namespace Git_Diff_Checker
         {
             return file.Length <= currentFilePosition;
         }
+
         public static bool EndOfFile(List<Change> file, int currentFilePosition)
         {
             return file.Count <= currentFilePosition;
@@ -88,12 +88,14 @@ namespace Git_Diff_Checker
         {
             //new list made to hold changes
             List<Change> possibleChanges = new List<Change>();
+
             //check fo rhte end of file being met
             if (file.Length == currentFilePosition)
             {
                 //changes returned
                 return possibleChanges;
             }
+
             //loops through all values in the file left after the given position
             for (int i = currentFilePosition; i < file.Length; i++)
             {
@@ -103,9 +105,11 @@ namespace Git_Diff_Checker
                     //increase of line number
                     lineNumber++;
                 }
+
                 //values added to the change list
                 possibleChanges.Add(new Change { Word = file[i], Position = i, LineNumber = lineNumber, Action = action, WordColour = colour });
             }
+
             //change list returned
             return possibleChanges;
         }
@@ -134,53 +138,63 @@ namespace Git_Diff_Checker
                     firstFound = true;
                     matchCount++;
                 }
+
                 if(firstFound && possibleAdditions[addPosition].Word != possibleRemovals[removePosition].Word)
                 {
                     nextDifference = true;
                 }
+
                 addPosition++;
-                removePosition++;
-            
+                removePosition++;            
             }
+
             return matchCount; 
         }
 
         public static List<Change> MergeReadAhead(List<Change> possibleAdditions, List<Change> possibleRemovals) 
         {
-            var shorterList = Math.Min(possibleAdditions.Count, possibleRemovals.Count);
-            var longerList = Math.Max(possibleAdditions.Count, possibleRemovals.Count);
+            List<Change> shorterList;
+            List<Change> longerList;
+
+            if(possibleAdditions.Count < possibleRemovals.Count)
+            {
+                shorterList = possibleAdditions;
+                longerList = possibleRemovals;
+            }
+            else
+            {
+                shorterList = possibleRemovals;
+                longerList = possibleAdditions;
+            }
+
             Dictionary<int, int> matchCount = new Dictionary<int, int>();
 
-            for(int i = 0; i < longerList - shorterList; i++)
+            for(int i = 0; i < longerList.Count - shorterList.Count; i++)
             {
-                matchCount.Add(i, offsetCount(possibleAdditions, possibleRemovals, i));
+                matchCount.Add(i, offsetCount(shorterList, longerList, i));
             }
 
-            var j = matchCount.FirstOrDefault(x => x.Value == matchCount.Values.Max()).Key;
+            int offset = matchCount.FirstOrDefault(x => x.Value == matchCount.Values.Max()).Key;
             List<Change> mergedChanges = new List<Change>();
-            int k = 0;
-            while(k < j)
+
+
+            for(int i = 0; i < offset; i++)
             {
-                mergedChanges.Add(new Change { Word = possibleAdditions[k].Word, Position = possibleAdditions[k].Position, LineNumber = possibleAdditions[k].LineNumber, Action = possibleAdditions[k].Action, WordColour = possibleAdditions[k].WordColour });
-                k++;
+                mergedChanges.Add(longerList[i]);
             }
             
-
-            for (int i = 0; i < shorterList; i++)
+            for(int i = 0; i < shorterList.Count; i++)
             {                
-                if(possibleAdditions[i+j].Word == possibleRemovals[i].Word)
+                if(shorterList[i].Word == longerList[i+offset].Word)
                 {
                     break;
-                    //mergedChanges.Add(new Change { Word = possibleAdditions[i].Word, Position = possibleAdditions[i].Position, LineNumber = possibleAdditions[i].LineNumber, Action = Actions.Unchanged, WordColour = ConsoleColor.White});
                 }
 
-                  mergedChanges.Add(possibleAdditions[i + j]);
-                  mergedChanges.Add(possibleRemovals[i]);
+                  mergedChanges.Add(longerList[i + offset]);
+                  mergedChanges.Add(shorterList[i]);
             }
 
             return mergedChanges;
         }
-
     }
-
 }

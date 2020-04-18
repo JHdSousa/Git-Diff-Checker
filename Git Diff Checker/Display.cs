@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Git_Diff_Checker
 {
-    class Display
+    public class Display
     {
         //when the files are the same
         public static void NoChange() 
@@ -15,11 +15,12 @@ namespace Git_Diff_Checker
         //if the files entered did have differences
         public static void OutputToUser(List<Change>differences) 
         {
-            //lineNumber var to hold what the current line number is 
-            var lineNumber = 0;
+            //lineNumber variable to hold what the current line number is 
+            int lineNumber = 0;
             Console.Write(":> ");
-            //loop through everything stored in teh change list
-            foreach(var difference in differences)
+
+            //loop through everything stored in the change list
+            foreach(Change difference in differences)
             {
                 ////checks for empty string
                 if (difference.Word != string.Empty )
@@ -30,8 +31,10 @@ namespace Git_Diff_Checker
                         //two blank lines added to space out the lines
                         Console.WriteLine();
                         Console.WriteLine();
+
                         //new line number added to the beginning of a new line before anymore of the changle list contents is displayed 
                         Console.Write($":> Line: {difference.LineNumber}", Console.ForegroundColor = ConsoleColor.Blue);
+
                         //line number counter increased to mathc the line number just displayed
                         lineNumber = difference.LineNumber;
                     }
@@ -41,6 +44,7 @@ namespace Git_Diff_Checker
             }
             //once the file has displayed everything  a blank line is added
             Console.WriteLine();
+
             //the foreground colour is reset 
             Console.ForegroundColor = ConsoleColor.White;
         }

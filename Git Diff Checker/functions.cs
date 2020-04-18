@@ -8,7 +8,6 @@ namespace Git_Diff_Checker
 {
     public class CommandCheck
     {
-        
         //checks the two files both exist before trying to find differences
         private static string FileExist(string[] file1, string[] file2)
         {
@@ -21,9 +20,10 @@ namespace Git_Diff_Checker
             else
             {
                 //looks for differneces in the file and creates a list variable
-                var differences = new DetailedDiff().Changes(file1, file2, Actions.Addition);
+                List<Change> differences = new DetailedDiff().Changes(file1, file2, Actions.Addition);
+
                 //if the file returned contains values and is not empty
-                if(differences.Count > 0 )
+                if (differences.Count > 0)
                 {
                     //displays the differences to the user
                     Display.OutputToUser(differences);
@@ -36,11 +36,12 @@ namespace Git_Diff_Checker
                     //if there are no changes a different display function is called
                     Display.NoChange();
                 }
+
                 //returns an empty string if the the displaying and logfile creation was successful
                 return string.Empty;
-            
             }
         }
+
         //checks command word entered by the user
         public static string ValidCommand(string Command, string[] file1, string[] file2)
         {
@@ -49,12 +50,11 @@ namespace Git_Diff_Checker
                 //when the command given is diff
                 case "diff":
                     //runs the test for file exists and returns any errorr messages returned from the check
-                    return FileExist(file1,file2);
-                    
+                    return FileExist(file1, file2);
+
                 //when the input is not diff, the user is displayed an errorr message    
                 default:
                     return ":> [OUTPUT] Unknown command";
-                    
             }
         }
     }

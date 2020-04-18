@@ -1,4 +1,4 @@
-using System;
+using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
 using Git_Diff_Checker;
@@ -13,20 +13,18 @@ namespace Git_Diff_Checker_Test
         public void Setup()
         {
             _gitDiffChecker = new DetailedDiff();
-        }
-        
+        }        
 
         //testing diff function
-        //testing looking for additions
         [Test]
         public void HandlesBothArraysEmpty()
         {
             // assign
-            var stringOrig = new string[] {  };
-            var stringNew = new string[] { };
+            string[] stringOrig = new string[] {  };
+            string[] stringNew = new string[] { };
 
             // action
-            var actualChanges = _gitDiffChecker.Changes(stringNew, stringOrig, Actions.Addition);
+            List<Change> actualChanges = _gitDiffChecker.Changes(stringNew, stringOrig, Actions.Addition);
 
             // assert
             Assert.AreEqual(0, actualChanges.Count);
@@ -36,14 +34,13 @@ namespace Git_Diff_Checker_Test
         public void HandlesEditedArrayEmpty()
         {
             // assign
-            var stringOrig = new string[] { "1" };
-            var stringNew = new string[] {  };
+            string[] stringOrig = new string[] { "1" };
+            string[] stringNew = new string[] {  };
 
             // action
-            var actualChanges = _gitDiffChecker.Changes(stringNew, stringOrig, Actions.Addition);
+            List<Change> actualChanges = _gitDiffChecker.Changes(stringNew, stringOrig, Actions.Addition);
 
             // assert
-            //Assert.Throws<Exception>(() => gitDiffChecker.Changes(stringOrig, stringNew, Actions.Addition));
             Assert.AreEqual(1, actualChanges.Count);
             Assert.True(actualChanges.All(x => x.Word == "1"));
         }
@@ -52,14 +49,13 @@ namespace Git_Diff_Checker_Test
         public void HandlesOriginalArrayEmpty()
         {
             // assign
-            var stringOrig = new string[] { };
-            var stringNew = new string[] { "1" };
+            string[] stringOrig = new string[] { };
+            string[] stringNew = new string[] { "1" };
 
             // action
-            var actualChanges = _gitDiffChecker.Changes(stringNew, stringOrig, Actions.Addition);
+            List<Change> actualChanges = _gitDiffChecker.Changes(stringNew, stringOrig, Actions.Addition);
 
             // assert
-            //Assert.Throws<Exception>(() => gitDiffChecker.Changes(stringOrig, stringNew, Actions.Addition));
             Assert.AreEqual(1, actualChanges.Count);
             Assert.True(actualChanges.All(x => x.Word == "1"));
         }
@@ -68,31 +64,27 @@ namespace Git_Diff_Checker_Test
         public void HandlesBothArraysSame()
         {
             // assign
-            var stringOrig = new string[] { "1","2" };
-            var stringNew = new string[] { "1", "2" };
+            string[] stringOrig = new string[] { "1","2" };
+            string[] stringNew = new string[] { "1", "2" };
 
             // action
-            var actualChanges = _gitDiffChecker.Changes(stringNew, stringOrig, Actions.Addition);
+            List<Change> actualChanges = _gitDiffChecker.Changes(stringNew, stringOrig, Actions.Addition);
 
             // assert
             Assert.Zero(actualChanges.Count);
         }
 
-        [Ignore("not sorted")]
         [Test]
         [TestCase(new string[] { }, new string[] { }, 0, "")]
         [TestCase(new string[] { "1" }, new string[] { }, 1, "1")]
-        public void HandlesOriginalArrayEmptyzzzzz(string[] stringOrig, string[] stringNew, int expectedDifferences, string found)
+        public void HandlesOriginalArrayEmpty(string[] stringOrig, string[] stringNew, int expectedDifferences, string found)
         {
-
             // action
-            var actualChanges = _gitDiffChecker.Changes(stringNew, stringOrig, Actions.Addition);
+            List<Change> actualChanges = _gitDiffChecker.Changes(stringNew, stringOrig, Actions.Addition);
 
             // assert
-            //Assert.Throws<Exception>(() => gitDiffChecker.Changes(stringOrig, stringNew, Actions.Addition));
             Assert.AreEqual(expectedDifferences, actualChanges.Count);
             Assert.True(actualChanges.All(x => x.Word == found));
-        }
-        
+        }        
     }
 }
