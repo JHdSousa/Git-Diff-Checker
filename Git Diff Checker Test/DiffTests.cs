@@ -31,55 +31,39 @@ namespace Git_Diff_Checker_Test
         }
 
         [Test]
-        public void HandlesEditedArrayEmpty()
+        [TestCase(new string[] { }, new string[] { "1"}, 1)]
+        [TestCase(new string[] { }, new string[] { "Hello", "world" }, 2)]
+        public void HandlesOriginalArrayEmpty(string[] original, string[] newString, int count)
         {
-            // assign
-            string[] stringOrig = new string[] { "1" };
-            string[] stringNew = new string[] {  };
+            // assign         
 
             // action
-            List<Change> actualChanges = _gitDiffChecker.Changes(stringNew, stringOrig, Actions.Addition);
+            List<Change> actualChanges = _gitDiffChecker.Changes(newString, original, Actions.Addition);
 
             // assert
-            Assert.AreEqual(1, actualChanges.Count);
-            Assert.True(actualChanges.All(x => x.Word == "1"));
+            Assert.AreEqual(count, actualChanges.Count);
         }
 
         [Test]
-        public void HandlesOriginalArrayEmpty()
+        [TestCase(new string[] { "hello", "there" }, new string[] { "hello", "there" })]
+        [TestCase(new string[] { "1", "2" }, new string[] { "1", "2" })]
+        public void HandlesBothArraysSame(string[] orig, string[] newFile)
         {
-            // assign
-            string[] stringOrig = new string[] { };
-            string[] stringNew = new string[] { "1" };
+            //// assign
 
             // action
-            List<Change> actualChanges = _gitDiffChecker.Changes(stringNew, stringOrig, Actions.Addition);
-
-            // assert
-            Assert.AreEqual(1, actualChanges.Count);
-            Assert.True(actualChanges.All(x => x.Word == "1"));
-        }
-
-        [Test]
-        public void HandlesBothArraysSame()
-        {
-            // assign
-            string[] stringOrig = new string[] { "1","2" };
-            string[] stringNew = new string[] { "1", "2" };
-
-            // action
-            List<Change> actualChanges = _gitDiffChecker.Changes(stringNew, stringOrig, Actions.Addition);
+            List<Change> actualChanges = _gitDiffChecker.Changes(newFile, orig, Actions.Addition);
 
             // assert
             Assert.Zero(actualChanges.Count);
         }
 
         [Test]
-        [TestCase(new string[] { }, new string[] { }, 0, "")]
-        [TestCase(new string[] { "1" }, new string[] { }, 1, "1")]
-        public void HandlesOriginalArrayEmpty(string[] stringOrig, string[] stringNew, int expectedDifferences, string found)
+        [TestCase(new string[] { }, new string[] {"there" }, 1, "there")]
+        [TestCase(new string[] {  }, new string[] { "1" }, 1, "1")]
+        public void HandlesEditedArrayEmpty(string[] stringNew, string[] stringOrig, int expectedDifferences, string found)
         {
-            // action
+            // action          
             List<Change> actualChanges = _gitDiffChecker.Changes(stringNew, stringOrig, Actions.Addition);
 
             // assert

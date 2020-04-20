@@ -7,13 +7,13 @@ namespace Git_Diff_Checker
 {
     public static class HelperFunctions
     {
-        //function for when the words are the same 
+        //function to add words that are the same to the change list marked as unchanged 
         public static Change ReadUnchanged(string[] file, int currentFilePosition)
-        {
-            //the word's action is set to be unchanged and the necessary extra attributes are added ot the list as well
+        {            
             return new Change { Word = file[currentFilePosition], Position = currentFilePosition, Action = Actions.Unchanged, WordColour = ConsoleColor.White };
         }
 
+        //function to set the line number for the each word in the list
         internal static List<Change> SetLineNumbers(List<Change> differences)
         {
             int lineNumber = 1;
@@ -44,8 +44,7 @@ namespace Git_Diff_Checker
 
             //loops through the file from the specified position until the end of the file is met
             for (int i = currentFilePosition; i < file.Length; i++)
-            {
-                //if the searchstring is found
+            {                
                 if (searchString == file[i])
                 {
                     break;
@@ -58,7 +57,8 @@ namespace Git_Diff_Checker
             return possibleChanges;
         }
 
-        //bool function checking if the end of the file has been met
+        //bool function checking if the end of the file has been met, polymorphism is used with the follwoing 2 functions
+        //so that lists can be chacked just like an array
         public static bool EndOfFile(string[] file, int currentFilePosition)
         {
             return file.Length <= currentFilePosition;
@@ -78,21 +78,19 @@ namespace Git_Diff_Checker
             //check fo rhte end of file being met
             if (file.Length == currentFilePosition)
             {
-                //changes returned
                 return possibleChanges;
             }
 
             //loops through all values in the file left after the given position
             for (int i = currentFilePosition; i < file.Length; i++)
             {
-                //values added to the change list
-                possibleChanges.Add(new Change { Word = file[i], Position = i, Action = action, WordColour = colour });
+               possibleChanges.Add(new Change { Word = file[i], Position = i, Action = action, WordColour = colour });
             }
 
-            //change list returned
             return possibleChanges;
         }
 
+        //function to check if there is an offset between the addition and removal files
         private static int offsetCount(List<Change> possibleAdditions, List<Change> possibleRemovals, int offset)
         {
             bool firstFound = false;
@@ -109,7 +107,7 @@ namespace Git_Diff_Checker
             {
                 addPosition = offset;
             }
-
+            //loop while the next difference is not found and there are still values in the list
             while (!nextDifference && !EndOfFile(possibleAdditions, addPosition) && !EndOfFile(possibleRemovals, removePosition)) 
             {
                 if(possibleAdditions[addPosition].Word == possibleRemovals[removePosition].Word)
@@ -123,6 +121,7 @@ namespace Git_Diff_Checker
                     nextDifference = true;
                 }
 
+                //increase the position variables so that the loop doesn't get stuck in a loop
                 addPosition++;
                 removePosition++;            
             }
@@ -130,11 +129,14 @@ namespace Git_Diff_Checker
             return matchCount; 
         }
 
+        //function that merges the possible additions and removals into a single change list that contains all the 
+        //correct changes within the section of the file. taking into account the offset found.
         public static List<Change> MergeReadAhead(List<Change> possibleAdditions, List<Change> possibleRemovals) 
         {
             List<Change> shorterList;
             List<Change> longerList;
 
+            //check for which of the two files is shorter and assigning them to variables to be held for easier use
             if(possibleAdditions.Count < possibleRemovals.Count)
             {
                 shorterList = possibleAdditions;
@@ -146,17 +148,20 @@ namespace Git_Diff_Checker
                 longerList = possibleAdditions;
             }
 
+            //dictionary used to decide which offset is the correct one to use
             Dictionary<int, int> matchCount = new Dictionary<int, int>();
 
             for(int i = 0; i < longerList.Count - shorterList.Count; i++)
             {
+                //building of the dic
                 matchCount.Add(i, offsetCount(shorterList, longerList, i));
             }
 
+            //checks the dictionary for the correct offset to use
             int offset = matchCount.FirstOrDefault(x => x.Value == matchCount.Values.Max()).Key;
             List<Change> mergedChanges = new List<Change>();
 
-
+            //merging the two arrays togetehr using the correct offset and stopping when the values match in the arrays again
             for(int i = 0; i < offset; i++)
             {
                 mergedChanges.Add(longerList[i]);
