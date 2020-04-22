@@ -8,12 +8,13 @@ namespace Git_Diff_Checker
     //basic class for checking if the files are different
     public class Diff
     {
-        //set the display to white during the basic diff
+        //set the display to red during the basic diff if the files are different
         public void DisplayColour()
         {
-            Console.ForegroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.Red;
         }
 
+        //basic difference checking function
         public virtual List<Change> Changes(string[] file1, string[] file2, Actions action)
         {
             List<Change> changeList = new List<Change>();
@@ -34,10 +35,10 @@ namespace Git_Diff_Checker
     //class identifying detailed differences in the files
     public class DetailedDiff : Diff
     {
-        //overrides the display colour from parent class to green
+        //overrides the display colour from parent class to white as a reset
         public void OverrideDisplayColour()
         {
-            Console.ForegroundColor = ConsoleColor.Green;
+            Console.ForegroundColor = ConsoleColor.White;
         }
         
         public override List<Change> Changes(string[] file1, string[] file2, Actions action)

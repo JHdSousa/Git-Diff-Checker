@@ -166,7 +166,7 @@ namespace Git_Diff_Checker
             {
                 mergedChanges.Add(longerList[i]);
             }
-            
+            //merging the arrays while accounting for the left over offset
             for(int i = 0; i < shorterList.Count; i++)
             {                
                 if(shorterList[i].Word == longerList[i+offset].Word)
